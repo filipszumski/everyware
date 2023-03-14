@@ -14,7 +14,7 @@ export const Header = () => {
   return (
     <header className="bg-gray-800 p-4 relative text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
-        <img src="https://picsum.photos/200" alt="Logo" className="w-12 h-12" />
+        <img src="https://picsum.photos/200" alt="Logo" className="w-12 h-12 rounded-xl" />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
           {ROUTES.map((route) => {
             return (
