@@ -1,29 +1,18 @@
-import { Product } from "@/components/Product";
+import { ProductsListItem } from "@/components/ProductsListItem";
+import { ProductsApiResponse } from "@/shared/types/productsResponse";
 import { InferGetStaticPropsType } from "next";
-
-export type ProductsApiResponse = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: Category;
-  image: string;
-  rating: Rating;
-};
-
-type Category = "electronics" | "jewelery" | "men's clothing" | "women's clothing";
-
-type Rating = {
-  rate: number;
-  count: number;
-};
+import Link from "next/link";
 
 const ProductsPage = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
-          <Product {...product} key={product.id}></Product>
+        {products.map(({ title, rating, price, image, id }) => (
+          <li key={id}>
+            <Link href={`/products/${id}`}>
+              <ProductsListItem data={{ image, price, rating, title }} />
+            </Link>
+          </li>
         ))}
       </ul>
     </>

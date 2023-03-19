@@ -2,11 +2,8 @@ import { ROUTES } from "@/utils/routes";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { Bars3Icon } from "@heroicons/react/20/solid";
-
-const NAV_LINK_BG = "bg-cyan-800";
-const NAV_LINK_STYLES = "p-2 rounded-lg hover:bg-cyan-600";
+import { NavLinkButton } from "./LinkButton";
 
 export const Header = () => {
   const router = useRouter();
@@ -19,14 +16,8 @@ export const Header = () => {
           {ROUTES.map((route) => {
             return (
               <li key={route.path}>
-                <Link
-                  href={route.path}
-                  className={`
-              ${router.asPath === route.path && NAV_LINK_BG}
-              ${NAV_LINK_STYLES}
-              `}
-                >
-                  {route.title}
+                <Link href={route.path} legacyBehavior passHref>
+                  <NavLinkButton isActive={router.asPath === route.path}>{route.title}</NavLinkButton>
                 </Link>
               </li>
             );
@@ -44,21 +35,19 @@ export const Header = () => {
             leaveTo="scale-y-0 opacity-0"
           >
             <Popover.Panel className="p-2 bg-cyan-700 grid grid-cols-1 gap-2 w-full border-t-2 border-t-cyan-800">
-              {ROUTES.map((route) => {
-                return (
-                  <Popover.Button
-                    key={route.path}
-                    className={`
-                  ${router.asPath === route.path && NAV_LINK_BG}
-                  ${NAV_LINK_STYLES}
-                  `}
-                    as={Link}
-                    href={route.path}
-                  >
-                    {route.title}
-                  </Popover.Button>
-                );
-              })}
+              {({ close }) => (
+                <>
+                  {ROUTES.map((route) => {
+                    return (
+                      <Link key={route.path} href={route.path} legacyBehavior passHref>
+                        <NavLinkButton onClick={() => close()} isActive={router.asPath === route.path}>
+                          {route.title}
+                        </NavLinkButton>
+                      </Link>
+                    );
+                  })}
+                </>
+              )}
             </Popover.Panel>
           </Transition>
         </Popover>
