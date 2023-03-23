@@ -3,10 +3,17 @@ import { ProductDetails } from "@/components/ProductDetails";
 import { ProductsApiResponse } from "@/shared/types/productsResponse";
 import { GetStaticPathsResult, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Param = { id: string };
 
 const ProductDetailsPage = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading..</div>;
+  }
+
   if (!product) {
     return <div>Something went wrong!</div>;
   }
@@ -14,9 +21,9 @@ const ProductDetailsPage = ({ product }: InferGetStaticPropsType<typeof getStati
   return (
     <div>
       <div className="mb-6">
-        <Button>
-          <Link href="/products">Back</Link>
-        </Button>
+        <Link href="/products">
+          <Button>Back</Button>
+        </Link>
       </div>
       <ProductDetails data={product} />
     </div>
@@ -48,6 +55,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Param>) =
 
   const response = await fetch(`https://fakestoreapi.com/products/${params.id}`);
   const product: ProductsApiResponse | null = await response.json();
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
