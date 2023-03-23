@@ -17,7 +17,7 @@ export const Header = () => {
             return (
               <li key={route.path}>
                 <Link href={route.path} legacyBehavior passHref>
-                  <NavLinkButton isActive={router.asPath === route.path}>{route.title}</NavLinkButton>
+                  <NavLinkButton isActive={router.pathname === route.path}>{route.title}</NavLinkButton>
                 </Link>
               </li>
             );
@@ -40,7 +40,7 @@ export const Header = () => {
                   {ROUTES.map((route) => {
                     return (
                       <Link key={route.path} href={route.path} legacyBehavior passHref>
-                        <NavLinkButton onClick={() => close()} isActive={router.asPath === route.path}>
+                        <NavLinkButton onClick={() => close()} isActive={router.pathname === route.path}>
                           {route.title}
                         </NavLinkButton>
                       </Link>
