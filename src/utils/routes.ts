@@ -4,11 +4,11 @@ export const ROUTES = [
     title: "Home",
   },
   {
-    path: "/about",
-    title: "About",
-  },
-  {
     path: "/products",
     title: "Products",
+  },
+  {
+    path: "/pagination-csr",
+    title: "Pagination CSR",
   },
 ];
