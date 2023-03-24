@@ -1,5 +1,5 @@
+import { getProducts } from "@/api/products/getProducts";
 import { ProductsListItem } from "@/components/ProductsListItem";
-import { ProductsApiResponse } from "@/shared/types/productsResponse";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 
@@ -20,8 +20,7 @@ const ProductsPage = ({ products }: InferGetStaticPropsType<typeof getStaticProp
 };
 
 export const getStaticProps = async () => {
-  const response = await fetch("https://fakestoreapi.com/products");
-  const products: ProductsApiResponse[] = await response.json();
+  const products = await getProducts();
 
   return {
     props: {

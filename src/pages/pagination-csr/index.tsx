@@ -1,8 +1,10 @@
+import { usePaginationCsrQuery } from "@/api/pagination-csr/usePaginationCrsQuery";
 import { Pagination } from "@/components/Pagination";
 
-import { usePaginationCsrQuery } from "./api/usePaginationCrsQuery";
+import { usePaginationCsr } from "@/shared/hooks/usePaginationCsr";
 
 const PaginationCSR = () => {
+  const { pagination } = usePaginationCsr();
   const { productsQuery } = usePaginationCsrQuery();
 
   if (productsQuery.isLoading) {
@@ -16,7 +18,7 @@ const PaginationCSR = () => {
           <li key={product.id}>{product.title}</li>
         ))}
       </ul>
-      <Pagination />
+      <Pagination pagination={pagination} />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { usePagination } from "@/shared/hooks/usePagination";
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -8,6 +7,17 @@ import {
 import lodash from "lodash";
 import Link from "next/link";
 
+type Pagination = {
+  currentPage: number;
+  currentTake: number;
+  getPageLink: (page: number, take: number) => string;
+  pageCount: number;
+};
+
+type PaginationProps = {
+  pagination: Pagination;
+};
+
 const VISIBLE_PAGES = 5;
 
 const getFirstPageIndex = (currentPageNumber: number, pageCount: number) => {
@@ -16,8 +26,7 @@ const getFirstPageIndex = (currentPageNumber: number, pageCount: number) => {
   return Math.min(Math.max(currentPageIndex - Math.floor(VISIBLE_PAGES / 2), 0), pageCount - VISIBLE_PAGES);
 };
 
-export const Pagination = () => {
-  const { currentPage, currentTake, getPageLink, pageCount } = usePagination();
+export const Pagination = ({ pagination: { currentPage, currentTake, getPageLink, pageCount } }: PaginationProps) => {
   return (
     <nav className="mt-4">
       <ul className="flex gap-2 items-center">
@@ -72,7 +81,7 @@ export const Pagination = () => {
         </li>
         <li>
           <Link
-            href={getPageLink(10, currentTake)}
+            href={getPageLink(pageCount, currentTake)}
             className={`
               ${currentPage === pageCount && "pointer-events-none"}
             `}

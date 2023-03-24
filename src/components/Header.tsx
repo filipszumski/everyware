@@ -1,23 +1,24 @@
-import { ROUTES } from "@/utils/routes";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import { NavLinkButton } from "./LinkButton";
+import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
 
 export const Header = () => {
   const router = useRouter();
+  const pathname = router.asPath.split("?")[0];
 
   return (
     <header className="bg-cyan-700 p-4 relative text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
         <img src="https://picsum.photos/200" alt="Logo" className="w-12 h-12 rounded-xl" />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
-          {ROUTES.map((route) => {
+          {NAVIGATION_LIST.map((item) => {
             return (
-              <li key={route.path}>
-                <Link href={route.path} legacyBehavior passHref>
-                  <NavLinkButton isActive={router.pathname === route.path}>{route.title}</NavLinkButton>
+              <li key={item.href}>
+                <Link href={item.href} legacyBehavior passHref>
+                  <NavLinkButton isActive={pathname === item.href}>{item.title}</NavLinkButton>
                 </Link>
               </li>
             );
@@ -37,11 +38,11 @@ export const Header = () => {
             <Popover.Panel className="p-2 bg-cyan-700 grid grid-cols-1 gap-2 w-full border-t-2 border-t-cyan-800">
               {({ close }) => (
                 <>
-                  {ROUTES.map((route) => {
+                  {NAVIGATION_LIST.map((item) => {
                     return (
-                      <Link key={route.path} href={route.path} legacyBehavior passHref>
-                        <NavLinkButton onClick={() => close()} isActive={router.pathname === route.path}>
-                          {route.title}
+                      <Link key={item.href} href={item.href} legacyBehavior passHref>
+                        <NavLinkButton onClick={() => close()} isActive={pathname === item.href}>
+                          {item.title}
                         </NavLinkButton>
                       </Link>
                     );

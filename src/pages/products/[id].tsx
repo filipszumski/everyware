@@ -1,6 +1,7 @@
+import { getProduct } from "@/api/products/getProduct";
+import { getProducts } from "@/api/products/getProducts";
 import { Button } from "@/components/Button";
 import { ProductDetails } from "@/components/ProductDetails";
-import { ProductsApiResponse } from "@/shared/types/productsResponse";
 import { GetStaticPathsResult, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,8 +32,7 @@ const ProductDetailsPage = ({ product }: InferGetStaticPropsType<typeof getStati
 };
 
 export const getStaticPaths = async (): Promise<GetStaticPathsResult<Param>> => {
-  const response = await fetch("https://fakestoreapi.com/products");
-  const products: ProductsApiResponse[] = await response.json();
+  const products = await getProducts();
 
   return {
     paths: products.map((product) => {
@@ -53,8 +53,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Param>) =
     };
   }
 
-  const response = await fetch(`https://fakestoreapi.com/products/${params.id}`);
-  const product: ProductsApiResponse | null = await response.json();
+  const product = await getProduct(params.id);
 
   if (!product) {
     return {

@@ -1,30 +1,7 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useQuery } from "react-query";
-import { usePagination } from "../../../shared/hooks/usePagination";
-
-export interface Product {
-  id: string;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  rating: Rating;
-  image: string;
-  longDescription: string;
-}
-
-export interface Rating {
-  rate: number;
-  count: number;
-}
-
-const getProducts = async (searchParams: string) => {
-  const products = await axios.get<Product[]>(`https://naszsklep-api.vercel.app/api/products?${searchParams}`);
-
-  return products;
-};
+import { getProducts } from "./getProducts";
 
 export const usePaginationCsrQuery = () => {
   const router = useRouter();

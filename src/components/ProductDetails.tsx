@@ -1,4 +1,4 @@
-import { ProductsApiResponse } from "@/shared/types/productsResponse";
+import { ProductsApiResponse } from "@/api/products/types";
 
 type ProductDetailsProps = {
   data: ProductsApiResponse;

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useEffect } from "react";
-import { DEFAULT_OFFSET, DEFAULT_TAKE } from "../constants";
+import { DEFAULT_OFFSET, DEFAULT_TAKE } from "../constants/defaultSearchParamsValues";
 
-export const usePagination = () => {
+export const usePaginationCsr = () => {
   const router = useRouter();
   const pathname = router.pathname;
   const searchParams = router.query;
@@ -35,9 +35,11 @@ export const usePagination = () => {
   };
 
   return {
-    currentPage: currentPage || 1,
-    currentTake: currentTake || DEFAULT_TAKE,
-    getPageLink,
-    pageCount,
+    pagination: {
+      currentPage: currentPage || 1,
+      currentTake: currentTake || DEFAULT_TAKE,
+      getPageLink,
+      pageCount,
+    },
   };
 };
