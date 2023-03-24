@@ -7,7 +7,6 @@ import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
 
 export const Header = () => {
   const router = useRouter();
-  const pathname = router.asPath.split("?")[0];
 
   return (
     <header className="bg-cyan-700 p-4 relative text-white">
@@ -18,7 +17,7 @@ export const Header = () => {
             return (
               <li key={item.href}>
                 <Link href={item.href} legacyBehavior passHref>
-                  <NavLinkButton isActive={pathname === item.href}>{item.title}</NavLinkButton>
+                  <NavLinkButton isActive={router.pathname.startsWith(item.pathname)}>{item.title}</NavLinkButton>
                 </Link>
               </li>
             );
@@ -41,7 +40,7 @@ export const Header = () => {
                   {NAVIGATION_LIST.map((item) => {
                     return (
                       <Link key={item.href} href={item.href} legacyBehavior passHref>
-                        <NavLinkButton onClick={() => close()} isActive={pathname === item.href}>
+                        <NavLinkButton onClick={() => close()} isActive={router.pathname.startsWith(item.pathname)}>
                           {item.title}
                         </NavLinkButton>
                       </Link>
