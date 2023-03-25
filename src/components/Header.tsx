@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import { NavLinkButton } from "./LinkButton";
 import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
+import Image from "next/image";
 
 export const Header = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ export const Header = () => {
   return (
     <header className="bg-cyan-700 p-4 relative text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
-        <img src="https://picsum.photos/200" alt="Logo" className="w-12 h-12 rounded-xl" />
+        <Image src="https://picsum.photos/200" alt="Logo" width={48} height={48} className="rounded-lg" />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
           {NAVIGATION_LIST.map((item) => {
             return (
