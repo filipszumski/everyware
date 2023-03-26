@@ -23,10 +23,15 @@ const VISIBLE_PAGES = 5;
 const getFirstPageIndex = (currentPageNumber: number, pageCount: number) => {
   const currentPageIndex = currentPageNumber - 1;
 
-  return Math.min(Math.max(currentPageIndex - Math.floor(VISIBLE_PAGES / 2), 0), pageCount - VISIBLE_PAGES);
+  return Math.min(
+    Math.max(currentPageIndex - Math.floor(VISIBLE_PAGES / 2), 0),
+    pageCount - VISIBLE_PAGES,
+  );
 };
 
-export const Pagination = ({ pagination: { currentPage, currentTake, getPageLink, pageCount } }: PaginationProps) => {
+export const Pagination = ({
+  pagination: { currentPage, currentTake, getPageLink, pageCount },
+}: PaginationProps) => {
   return (
     <nav className="mt-4">
       <ul className="flex gap-2 items-center">
@@ -61,7 +66,11 @@ export const Pagination = ({ pagination: { currentPage, currentTake, getPageLink
                 href={link}
                 className={`
                  rounded-full hover:bg-cyan-600 hover:text-white flex justify-center items-center h-7 aspect-square
-                ${currentPage === page ? "bg-cyan-700 text-white" : "bg-gray-200"}  
+                ${
+                  currentPage === page
+                    ? "bg-cyan-700 text-white"
+                    : "bg-gray-200"
+                }  
             `}
               >
                 {page}

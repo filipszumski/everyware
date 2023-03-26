@@ -8,7 +8,11 @@ export type ProductsApiResponse = {
   rating: Rating;
 };
 
-type Category = "electronics" | "jewelery" | "men's clothing" | "women's clothing";
+type Category =
+  | "electronics"
+  | "jewelery"
+  | "men's clothing"
+  | "women's clothing";
 
 type Rating = {
   rate: number;

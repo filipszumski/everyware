@@ -7,20 +7,19 @@ type Props = {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
-export const NavLinkButton = forwardRef<HTMLAnchorElement, Props>(function LinkButton(
-  { isActive, children, ...props },
-  ref
-) {
-  return (
-    <a
-      ref={ref}
-      {...props}
-      className={`
+export const NavLinkButton = forwardRef<HTMLAnchorElement, Props>(
+  function LinkButton({ isActive, children, ...props }, ref) {
+    return (
+      <a
+        ref={ref}
+        {...props}
+        className={`
         ${isActive && "bg-cyan-800"}
         p-2 rounded-lg hover:bg-cyan-600 w-full
   `}
-    >
-      {children}
-    </a>
-  );
-});
+      >
+        {children}
+      </a>
+    );
+  },
+);

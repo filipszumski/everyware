@@ -18,7 +18,7 @@ export const usePaginationCsrQuery = () => {
     },
     {
       enabled: !!offset && !!take,
-    }
+    },
   );
 
   return {

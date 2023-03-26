@@ -2,7 +2,7 @@ import { getProducts } from "@/api/products.ssr/getProducts";
 import { Product } from "@/api/products.ssr/types";
 import { Pagination } from "@/components/Pagination";
 import { usePaginationSsr } from "@/shared/hooks/usePaginationSsr";
-import axios from "axios";
+
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
 
@@ -12,7 +12,9 @@ type Params = {
 
 const DEFAULT_TAKE = 25;
 
-const PaginationSSR = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PaginationSSR = ({
+  products,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback } = useRouter();
   const { pagination } = usePaginationSsr();
 
@@ -45,7 +47,10 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<{ products: Product[] }, Params> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<
+  { products: Product[] },
+  Params
+> = async ({ params }) => {
   if (!params?.page) {
     return {
       notFound: true,
@@ -56,7 +61,10 @@ export const getStaticProps: GetStaticProps<{ products: Product[] }, Params> = a
   const page = params?.page;
   const offset = (+page - 1) * DEFAULT_TAKE;
 
-  const products = await getProducts({ path, params: { take: DEFAULT_TAKE, offset } });
+  const products = await getProducts({
+    path,
+    params: { take: DEFAULT_TAKE, offset },
+  });
 
   if (!products) {
     return {
