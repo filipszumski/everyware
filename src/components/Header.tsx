@@ -10,7 +10,7 @@ export const Header = () => {
   const router = useRouter();
 
   return (
-    <header className="bg-cyan-700 p-4 relative text-white">
+    <header className="bg-cyan-700 p-4 fixed w-full z-50 text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
         <Image
           src="https://picsum.photos/200"
@@ -34,7 +34,7 @@ export const Header = () => {
             );
           })}
         </ul>
-        <Popover className="sm:hidden">
+        <Popover className="sm:hidden z-50">
           <Popover.Button>{<Bars3Icon className="w-8 h-8" />}</Popover.Button>
           <Transition
             className="absolute top-full left-0 min-w-full"
