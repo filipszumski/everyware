@@ -1,7 +1,10 @@
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useEffect } from "react";
-import { DEFAULT_OFFSET, DEFAULT_TAKE } from "../constants/defaultSearchParamsValues";
+import {
+  DEFAULT_OFFSET,
+  DEFAULT_TAKE,
+} from "../constants/defaultSearchParamsValues";
 
 export const usePaginationCsr = () => {
   const router = useRouter();

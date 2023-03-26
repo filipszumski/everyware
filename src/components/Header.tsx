@@ -12,13 +12,23 @@ export const Header = () => {
   return (
     <header className="bg-cyan-700 p-4 relative text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
-        <Image src="https://picsum.photos/200" alt="Logo" width={48} height={48} className="rounded-lg" />
+        <Image
+          src="https://picsum.photos/200"
+          alt="Logo"
+          width={48}
+          height={48}
+          className="rounded-lg"
+        />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
           {NAVIGATION_LIST.map((item) => {
             return (
               <li key={item.href}>
                 <Link href={item.href} legacyBehavior passHref>
-                  <NavLinkButton isActive={router.pathname.startsWith(item.pathname)}>{item.title}</NavLinkButton>
+                  <NavLinkButton
+                    isActive={router.pathname.startsWith(item.pathname)}
+                  >
+                    {item.title}
+                  </NavLinkButton>
                 </Link>
               </li>
             );
@@ -40,8 +50,16 @@ export const Header = () => {
                 <>
                   {NAVIGATION_LIST.map((item) => {
                     return (
-                      <Link key={item.href} href={item.href} legacyBehavior passHref>
-                        <NavLinkButton onClick={() => close()} isActive={router.pathname.startsWith(item.pathname)}>
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        legacyBehavior
+                        passHref
+                      >
+                        <NavLinkButton
+                          onClick={() => close()}
+                          isActive={router.pathname.startsWith(item.pathname)}
+                        >
                           {item.title}
                         </NavLinkButton>
                       </Link>
