@@ -1,6 +1,5 @@
-import { usePaginationCsrQuery } from "@/api/pagination-csr/usePaginationCrsQuery";
+import { usePaginationCsrQuery } from "@/api/products-csr/usePaginationCrsQuery";
 import { Pagination } from "@/components/Pagination";
-
 import { usePaginationCsr } from "@/shared/hooks/usePaginationCsr";
 
 const PaginationCSR = () => {

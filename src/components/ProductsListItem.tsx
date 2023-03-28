@@ -1,10 +1,7 @@
-import { ProductsApiResponse } from "@/api/products/types";
+import { Product } from "@/api/products/types";
 import Image from "next/image";
 
-type ProductListItem = Pick<
-  ProductsApiResponse,
-  "image" | "price" | "title" | "rating"
->;
+type ProductListItem = Pick<Product, "image" | "price" | "title" | "rating">;
 
 type ProductsListItemProps = {
   data: ProductListItem;

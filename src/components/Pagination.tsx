@@ -33,8 +33,8 @@ export const Pagination = ({
   pagination: { currentPage, currentTake, getPageLink, pageCount },
 }: PaginationProps) => {
   return (
-    <nav className="mt-4">
-      <ul className="flex gap-2 items-center">
+    <nav className="mt-8">
+      <ul className="flex gap-2 items-center justify-center">
         <li>
           <Link
             href={getPageLink(1, currentTake)}

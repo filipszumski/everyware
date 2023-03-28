@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Product } from "./types";
+import { Product } from "../products/types";
 
 export const getProducts = async (searchParams: string) => {
   const products = await axios.get<Product[]>(
