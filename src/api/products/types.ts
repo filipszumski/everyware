@@ -1,20 +1,15 @@
-export type ProductsApiResponse = {
-  id: number;
+export interface Product {
+  id: string;
   title: string;
   price: number;
   description: string;
-  category: Category;
-  image: string;
+  category: string;
   rating: Rating;
-};
+  image: string;
+  longDescription: string;
+}
 
-type Category =
-  | "electronics"
-  | "jewelery"
-  | "men's clothing"
-  | "women's clothing";
-
-type Rating = {
+export interface Rating {
   rate: number;
   count: number;
-};
+}

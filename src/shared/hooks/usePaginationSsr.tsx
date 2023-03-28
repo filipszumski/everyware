@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import queryString from "query-string";
-import { DEFAULT_TAKE } from "../constants/defaultSearchParamsValues";
+import { DEFAULT_TAKE } from "../constants/defaultPaginationValues";
 
 export const usePaginationSsr = () => {
   const router = useRouter();

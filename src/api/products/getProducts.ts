@@ -1,9 +1,10 @@
 import axios from "axios";
-import { ProductsApiResponse } from "./types";
+import { Product } from "./types";
 
-export const getProducts = async () => {
-  const response = await axios.get<ProductsApiResponse[]>(
-    "https://fakestoreapi.com/products",
+export const getProducts = async (params: string) => {
+  const products = await axios.get<Product[]>(
+    `https://naszsklep-api.vercel.app/api/products?${params}`,
   );
-  return response.data;
+
+  return products.data;
 };

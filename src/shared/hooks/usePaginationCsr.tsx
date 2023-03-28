@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import {
   DEFAULT_OFFSET,
   DEFAULT_TAKE,
-} from "../constants/defaultSearchParamsValues";
+} from "../constants/defaultPaginationValues";
 
 export const usePaginationCsr = () => {
   const router = useRouter();
