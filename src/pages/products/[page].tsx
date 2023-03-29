@@ -5,6 +5,7 @@ import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
 import { usePaginationSsr } from "@/shared/hooks";
 import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
+import { useRouter } from "next/router";
 
 type Params = {
   page: string;
@@ -14,6 +15,11 @@ const ProductsPage = ({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { pagination } = usePaginationSsr();
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -42,7 +48,7 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
         page: page.toString(),
       },
     })),
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
