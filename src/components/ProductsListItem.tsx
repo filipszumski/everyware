@@ -1,4 +1,4 @@
-import { Product } from "@/api/products/types";
+import { Product } from "@/api/products";
 import Image from "next/image";
 
 type ProductListItem = Pick<Product, "image" | "price" | "title" | "rating">;

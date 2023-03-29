@@ -1,15 +1,11 @@
-import { getProducts } from "@/api/products/getProducts";
-import { Product } from "@/api/products/types";
-import { Pagination } from "@/components/Pagination";
-import { usePaginationSsr } from "@/shared/hooks/usePaginationSsr";
-import { ProductsListItem } from "@/components/ProductsListItem";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import queryString from "query-string";
-import { DEFAULT_TAKE } from "@/shared/constants/defaultPaginationValues";
-import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
-import { APP_ROUTES } from "@/shared/constants/appRoutes";
+import { getProducts, Product } from "@/api/products";
+import { Pagination, ProductsListItem } from "@/components";
+import { usePaginationSsr } from "@/shared/hooks";
+import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
 
 type Params = {
   page: string;

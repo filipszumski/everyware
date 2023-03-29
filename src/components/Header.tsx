@@ -2,14 +2,14 @@ import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Bars3Icon } from "@heroicons/react/20/solid";
-import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
 import Image from "next/image";
+import { NAVIGATION_LIST } from "@/shared/constants";
 
 export const Header = () => {
   const router = useRouter();
 
   return (
-    <header className="relative bg-cyan-700 p-4 z-50  text-white">
+    <header className="sticky top-0 bg-cyan-700 p-4 z-50  text-white">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
         <Image
           src="https://picsum.photos/200"

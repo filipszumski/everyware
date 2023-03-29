@@ -1,5 +1,4 @@
-import { APP_ROUTES } from "@/shared/constants/appRoutes";
-import { NAVIGATION_LIST } from "@/shared/constants/navigationList";
+import { APP_ROUTES, NAVIGATION_LIST } from "@/shared/constants";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

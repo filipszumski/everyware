@@ -1,13 +1,6 @@
-import { getProduct } from "@/api/products/getProduct";
-import { getProducts } from "@/api/products/getProducts";
-import { Product } from "@/api/products/types";
-import { Button } from "@/components/Button";
-import { ProductDetails } from "@/components/ProductDetails";
-import { APP_ROUTES } from "@/shared/constants/appRoutes";
-import {
-  DEFAULT_OFFSET,
-  DEFAULT_TAKE,
-} from "@/shared/constants/defaultPaginationValues";
+import { getProduct, getProducts, Product } from "@/api/products";
+import { Button, ProductDetails } from "@/components";
+import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,7 +8,6 @@ import queryString from "query-string";
 
 type Param = {
   id: string;
-  page: string;
 };
 
 const ProductDetaulsPage = ({
@@ -50,7 +42,6 @@ export const getStaticPaths: GetStaticPaths<Param> = async () => {
     paths: products.map((product) => ({
       params: {
         id: product.id.toString(),
-        page: "1",
       },
     })),
     fallback: true,

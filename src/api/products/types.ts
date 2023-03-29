@@ -9,7 +9,7 @@ export interface Product {
   longDescription: string;
 }
 
-export interface Rating {
+interface Rating {
   rate: number;
   count: number;
 }
