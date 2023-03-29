@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import queryString from "query-string";
 import { getProducts, Product } from "@/api/products";
@@ -15,11 +14,6 @@ const ProductsPage = ({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { pagination } = usePaginationSsr();
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
@@ -48,7 +42,7 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
         page: page.toString(),
       },
     })),
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
