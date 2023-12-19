@@ -1,42 +1,36 @@
 import { Popover, Transition } from "@headlessui/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+
 import { NAVIGATION_LIST } from "@/shared/constants";
 
-export const Header = () => {
-  const router = useRouter();
+import logo from "../../public/everyware-logo.svg";
+import { NavLink } from "./NavLink";
 
+export const Header = () => {
   return (
-    <header className="sticky top-0 bg-cyan-700 p-4 z-50  text-white">
+    <header className="sticky top-0 bg-white  p-4 z-50 border-b-2 border-gray-200">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
         <Image
-          src="https://picsum.photos/200"
-          alt="Logo"
-          width={48}
-          height={48}
-          className="rounded-lg"
+          src={logo}
+          alt="Everyware shop logo"
+          height={40}
+          width={180}
+          priority
         />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
           {NAVIGATION_LIST.map((item) => {
             return (
-              <li key={item.pathname}>
-                <Link
-                  href={item.href}
-                  className={`
-                    ${router.pathname === item.pathname && "bg-cyan-800"}
-                    p-2 rounded-lg hover:bg-cyan-600 w-full
-  `}
-                >
-                  {item.title}
-                </Link>
+              <li key={item.title}>
+                <NavLink href={item.href}>{item.title}</NavLink>
               </li>
             );
           })}
         </ul>
         <Popover className="sm:hidden">
-          <Popover.Button>{<Bars3Icon className="w-8 h-8" />}</Popover.Button>
+          <Popover.Button>
+            {<Bars3Icon className="w-6 h-6 text-blue-500" />}
+          </Popover.Button>
           <Transition
             className="absolute top-full left-0 min-w-full"
             enter="transition ease-in-out origin-top duration-200"
@@ -48,22 +42,18 @@ export const Header = () => {
           >
             <Popover.Panel className="">
               {({ close }) => (
-                <ul className="p-4 grid grid-cols-1 gap-2 border-t-2 bg-cyan-700  border-t-cyan-800">
+                <ul className="p-4 grid grid-cols-1 gap-2 bg-white  border-t-2 border-t-gray-200 shadow-lg">
                   {NAVIGATION_LIST.map((item) => {
                     return (
-                      <li key={item.pathname}>
-                        <Link
-                          onClick={() => close()}
+                      <li key={item.title}>
+                        <NavLink
                           href={item.href}
-                          className={`
-                            ${
-                              router.pathname === item.pathname && "bg-cyan-800"
-                            }
-                            p-2 rounded-lg hover:bg-cyan-600 inline-block w-full
-      `}
+                          onClick={() => {
+                            close();
+                          }}
                         >
                           {item.title}
-                        </Link>
+                        </NavLink>
                       </li>
                     );
                   })}

@@ -1,11 +1,12 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import queryString from "query-string";
+
 import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
-import { usePaginationSsr } from "@/shared/hooks";
 import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
-import { useRouter } from "next/router";
+import { usePaginationSsr } from "@/shared/hooks";
 
 type Params = {
   page: string;

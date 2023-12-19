@@ -1,17 +1,24 @@
-import { APP_ROUTES, NAVIGATION_LIST } from "@/shared/constants";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+import { APP_ROUTES, NAVIGATION_LIST } from "@/shared/constants";
+
 const Products = () => {
   const router = useRouter();
-  const productsPageUrl = NAVIGATION_LIST.find(
-    (item) => item.pathname === APP_ROUTES.products,
-  )?.href;
 
   useEffect(() => {
-    if (!productsPageUrl) return;
+    const productsPageUrl = NAVIGATION_LIST.find((navListItem) => {
+      if (typeof navListItem.href === "string") return;
 
-    router.replace(productsPageUrl);
+      if (navListItem.href.pathname === APP_ROUTES.products) {
+        return true;
+      }
+    });
+
+    if (productsPageUrl?.href) {
+      router.replace(productsPageUrl?.href);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
