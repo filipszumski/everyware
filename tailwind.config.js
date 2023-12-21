@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/pages/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-lato)"],
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

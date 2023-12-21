@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { Product } from "./types";
 
 export const getProduct = async (id: string) => {

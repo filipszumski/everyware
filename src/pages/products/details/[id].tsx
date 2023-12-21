@@ -1,9 +1,10 @@
-import { getProduct, getProducts, Product } from "@/api/products";
-import { Button, ProductDetails } from "@/components";
-import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import queryString from "query-string";
+
+import { getProduct, getProducts, Product } from "@/api/products";
+import { Button, ProductDetails } from "@/components";
+import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
 
 type Param = {
   id: string;

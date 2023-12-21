@@ -1,7 +1,8 @@
-import { Product } from "@/api/products";
-import { NextSeo } from "next-seo";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 import ReactMarkdown from "react-markdown";
+
+import { Product } from "@/api/products";
 
 type ProductDetailsProps = {
   data: Product;

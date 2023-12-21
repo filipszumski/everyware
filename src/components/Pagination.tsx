@@ -7,7 +7,7 @@ import {
 import lodash from "lodash";
 import Link from "next/link";
 
-type Pagination = {
+type PaginationType = {
   currentPage: number;
   currentTake: number;
   getPageLink: (page: number, take: number) => string;
@@ -15,7 +15,7 @@ type Pagination = {
 };
 
 type PaginationProps = {
-  pagination: Pagination;
+  pagination: PaginationType;
 };
 
 const VISIBLE_PAGES = 5;
@@ -42,7 +42,7 @@ export const Pagination = ({
             ${currentPage === 1 && "pointer-events-none"}
           `}
           >
-            <ChevronDoubleLeftIcon className="h-6 w-6" />
+            <ChevronDoubleLeftIcon className="h-4 w-4" />
           </Link>
         </li>
         <li>
@@ -52,7 +52,7 @@ export const Pagination = ({
             ${currentPage === 1 && "pointer-events-none"}
           `}
           >
-            <ChevronLeftIcon className="h-6 w-6" />
+            <ChevronLeftIcon className="h-4 w-4" />
           </Link>
         </li>
         {lodash.times(VISIBLE_PAGES, (index) => {
@@ -65,10 +65,10 @@ export const Pagination = ({
               <Link
                 href={link}
                 className={`
-                 rounded-full hover:bg-cyan-600 hover:text-white flex justify-center items-center h-7 aspect-square
+                 rounded-full hover:bg-blue-600 hover:text-white flex justify-center items-center h-7 aspect-square
                 ${
                   currentPage === page
-                    ? "bg-cyan-700 text-white"
+                    ? "bg-blue-500 text-white"
                     : "bg-gray-200"
                 }  
             `}
@@ -85,7 +85,7 @@ export const Pagination = ({
               ${currentPage === pageCount && "pointer-events-none"}
             `}
           >
-            <ChevronRightIcon className="h-6 w-6" />
+            <ChevronRightIcon className="h-4 w-4" />
           </Link>
         </li>
         <li>
@@ -95,7 +95,7 @@ export const Pagination = ({
               ${currentPage === pageCount && "pointer-events-none"}
             `}
           >
-            <ChevronDoubleRightIcon className="h-6 w-6" />
+            <ChevronDoubleRightIcon className="h-4 w-4" />
           </Link>
         </li>
       </ul>
