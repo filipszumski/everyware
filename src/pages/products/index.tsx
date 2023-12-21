@@ -7,16 +7,12 @@ const Products = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const productsPageUrl = NAVIGATION_LIST.find((navListItem) => {
-      if (typeof navListItem.href === "string") return;
+    const productsPageUrl = NAVIGATION_LIST.find(
+      (navListItem) => navListItem.basePathname === APP_ROUTES.products,
+    );
 
-      if (navListItem.href.pathname === APP_ROUTES.products) {
-        return true;
-      }
-    });
-
-    if (productsPageUrl?.href) {
-      router.replace(productsPageUrl?.href);
+    if (productsPageUrl) {
+      router.replace(productsPageUrl?.href, undefined, { shallow: true });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

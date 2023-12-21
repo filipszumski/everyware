@@ -1,27 +1,39 @@
-import { Url } from "next/dist/shared/lib/router/router";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 
-type Props = PropsWithChildren<LinkProps>;
+type Props = PropsWithChildren<
+  LinkProps & {
+    exact?: boolean;
+    basePathname: string;
+  }
+>;
 
-function isActiveNavLink(href: Url, pathname: string) {
-  if (typeof href === "string") {
-    return href === pathname;
+function isActiveNavLink(
+  basePathname: string,
+  currentPathname: string,
+  exact?: boolean,
+) {
+  if (exact) {
+    return currentPathname === basePathname;
   } else {
-    return href.pathname === pathname;
+    return currentPathname.startsWith(basePathname);
   }
 }
 
-export const NavLink = ({ children, href, ...restProps }: Props) => {
+export const NavLink = ({
+  children,
+  exact,
+  basePathname,
+  ...restProps
+}: Props) => {
   const { pathname } = useRouter();
 
   return (
     <Link
-      href={href}
       className={`
           ${
-            isActiveNavLink(href, pathname)
+            isActiveNavLink(basePathname, pathname, exact)
               ? "font-bold bg-blue-200 text-blue-700"
               : "font-normal  text-blue-500 hover:bg-blue-100"
           }

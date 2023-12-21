@@ -18,7 +18,7 @@ const ProductDetaulsPage = ({
   return (
     <div>
       <div className="mb-6">
-        <Link href={{ pathname: APP_ROUTES.products, query: { page: 1 } }}>
+        <Link href={{ pathname: APP_ROUTES.productsPage, query: { page: 1 } }}>
           <Button>Back</Button>
         </Link>
       </div>

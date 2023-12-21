@@ -3,7 +3,7 @@ import queryString from "query-string";
 
 import { DEFAULT_TAKE } from "../constants/defaultPaginationValues";
 
-export const usePaginationSsr = () => {
+export const usePagination = () => {
   const router = useRouter();
   const pathname = router.pathname;
   const searchParams = router.query;
