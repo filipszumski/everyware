@@ -1,8 +1,16 @@
-import { ReactNode } from "react";
+import { ComponentProps, PropsWithChildren } from "react";
 
-export const Button = ({ children }: { children: ReactNode }) => {
+type ButtonProps = ComponentProps<"button">;
+
+export const Button = ({
+  children,
+  ...props
+}: PropsWithChildren<ButtonProps>) => {
   return (
-    <button className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-lg">
+    <button
+      className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-lg"
+      {...props}
+    >
       {children}
     </button>
   );
