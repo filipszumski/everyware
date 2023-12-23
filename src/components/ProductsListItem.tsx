@@ -14,7 +14,13 @@ export const ProductsListItem = ({
   return (
     <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 p-4 gap-4 transition-transform ease-in-out duration-150 hover:scale-105">
       <div className="relative aspect-square">
-        <Image src={image} alt={title} fill className="object-contain" />
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-contain"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
       </div>
       <h2 className="text-xl">{title}</h2>
       <div className="flex justify-between">
