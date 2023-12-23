@@ -42,7 +42,14 @@ export const ProductDetails = ({
       />
       <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
         <div className="relative aspect-video md:aspect-square">
-          <Image src={image} alt={title} fill className="object-contain" />
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
         </div>
         <div className="flex flex-col justify-start gap-4">
           <h2 className="text-3xl font-bold">{title}</h2>
