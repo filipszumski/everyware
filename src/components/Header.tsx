@@ -22,7 +22,13 @@ export const Header = () => {
           {NAVIGATION_LIST.map((item) => {
             return (
               <li key={item.title}>
-                <NavLink href={item.href}>{item.title}</NavLink>
+                <NavLink
+                  href={item.href}
+                  basePathname={item.basePathname}
+                  exact={item.exact}
+                >
+                  {item.title}
+                </NavLink>
               </li>
             );
           })}
@@ -48,6 +54,8 @@ export const Header = () => {
                       <li key={item.title}>
                         <NavLink
                           href={item.href}
+                          basePathname={item.basePathname}
+                          exact={item.exact}
                           onClick={() => {
                             close();
                           }}
