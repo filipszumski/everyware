@@ -7,7 +7,6 @@ import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
 import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
 
-
 type Params = {
   page: string;
 };
