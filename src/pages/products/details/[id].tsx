@@ -1,26 +1,24 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import queryString from "query-string";
 
 import { getProduct, getProducts, Product } from "@/api/products";
 import { Button, ProductDetails } from "@/components";
-import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
+import { DEFAULT_TAKE } from "@/shared/constants";
 
 type Param = {
   id: string;
 };
 
-const ProductDetaulsPage = ({
+const ProductDetailsPage = ({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  if (!product) return <div>Dupa</div>;
+  const router = useRouter();
 
   return (
     <div>
       <div className="mb-6">
-        <Link href={{ pathname: APP_ROUTES.productsPage, query: { page: 1 } }}>
-          <Button>Back</Button>
-        </Link>
+        <Button onClick={() => router.back()}>Back</Button>
       </div>
       <ProductDetails data={product} />
     </div>
@@ -68,4 +66,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default ProductDetaulsPage;
+export default ProductDetailsPage;
