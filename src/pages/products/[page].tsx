@@ -6,7 +6,7 @@ import queryString from "query-string";
 import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
 import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
-import { usePaginationSsr } from "@/shared/hooks";
+import { usePagination } from "@/shared/hooks";
 
 type Params = {
   page: string;
@@ -15,7 +15,7 @@ type Params = {
 const ProductsPage = ({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { pagination } = usePaginationSsr();
+  const { pagination } = usePagination();
   const router = useRouter();
 
   if (router.isFallback) {
