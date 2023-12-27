@@ -37,7 +37,7 @@ export const ProductDetails = ({
               type: "image/jpeg",
             },
           ],
-          siteName: "Online shop",
+          siteName: "Everyware",
         }}
       />
       <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
