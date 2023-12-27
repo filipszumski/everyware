@@ -1,5 +1,5 @@
-const title = "Online shop";
-const description = "Online shop with clothing";
+const title = "Everyware";
+const description = "Online shop";
 
 const nextSeoConfig = {
   title,

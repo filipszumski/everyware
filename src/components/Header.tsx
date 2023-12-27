@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <header className="sticky top-0 bg-white  p-4 z-50 border-b-2 border-gray-200">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
-        <Image src={logo} alt="Everyware shop logo" height={40} width={180} />
+        <Image src={logo} alt="Everyware logo" height={40} width={180} />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">
           {NAVIGATION_LIST.map((item) => {
             return (
