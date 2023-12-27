@@ -14,9 +14,12 @@ import { PAGE_COUNT } from "@/shared/constants";
 const VISIBLE_PAGES_BUTTONS = 5;
 
 const getFirstPageNumber = (currentPageNumber: number, pageCount: number) => {
+  // INFO
+  // first argument of returned function is calculating what page number should be first in pagination based on current page and number of visible page buttons
+  // after last page based of page limit is visible the second argument is limiting extending page button numbers over pageCount
   return Math.min(
     Math.max(currentPageNumber - Math.floor(VISIBLE_PAGES_BUTTONS / 2), 1),
-    pageCount - VISIBLE_PAGES_BUTTONS,
+    pageCount + 1 - VISIBLE_PAGES_BUTTONS,
   );
 };
 
