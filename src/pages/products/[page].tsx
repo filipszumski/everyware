@@ -26,7 +26,7 @@ const ProductsPage = ({
         {products.map(({ image, price, rating, title, id }) => (
           <li key={id}>
             <Link
-              href={{ pathname: APP_ROUTES.productsDetail, query: { id: id } }}
+              href={{ pathname: APP_ROUTES.productDetails, query: { id: id } }}
             >
               <ProductsListItem data={{ image, price, rating, title }} />
             </Link>
