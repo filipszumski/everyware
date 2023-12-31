@@ -16,12 +16,15 @@ const nextSeoConfig: DefaultSeoProps = {
     url: process.env.APP_URL,
     images: [
       {
-        url: `${process.env.APP_URL}${logo.src}`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}${logo.src}`,
         alt: "Everyware logo",
         type: "image/jpeg",
       },
     ],
     siteName: title,
+  },
+  twitter: {
+    cardType: "summary_large_image",
   },
 };
 

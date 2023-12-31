@@ -40,6 +40,9 @@ export const ProductDetails = ({
             },
           ],
         }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
       />
       <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
         <div className="relative aspect-video md:aspect-square">
