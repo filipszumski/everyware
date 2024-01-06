@@ -1,19 +1,17 @@
 import { DefaultSeoProps } from "next-seo";
 
-import logo from "./public/everyware-logo-og.svg";
+import { SEO_DEFAULTS } from "@/shared/constants/seoDefaults";
 
-const title = "Everyware - Online Shop";
-const description =
-  "Find everything you need in one click! Our online shop offers a wide variety of items, ensuring a hassle-free and enjoyable shopping experience. Dive into the world of endless choices today";
+import logo from "./public/everyware-logo-og.png";
 
 const nextSeoConfig: DefaultSeoProps = {
-  title,
-  description,
+  title: SEO_DEFAULTS.siteName,
+  description: SEO_DEFAULTS.description,
   openGraph: {
     type: "website",
-    title,
-    description,
-    url: process.env.APP_URL,
+    title: SEO_DEFAULTS.siteName,
+    description: SEO_DEFAULTS.description,
+    url: process.env.NEXT_PUBLIC_APP_URL,
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_APP_URL}${logo.src}`,
@@ -21,10 +19,13 @@ const nextSeoConfig: DefaultSeoProps = {
         type: "image/jpeg",
       },
     ],
-    siteName: title,
+    siteName: SEO_DEFAULTS.siteName,
   },
   twitter: {
     cardType: "summary_large_image",
+  },
+  facebook: {
+    appId: "3012791805518561",
   },
 };
 
