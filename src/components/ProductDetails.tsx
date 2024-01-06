@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { NextSeo } from "next-seo";
+import { NextSeo, ProductJsonLd } from "next-seo";
 import ReactMarkdown from "react-markdown";
 
 import { Product } from "@/api/products";
 import { APP_ROUTES } from "@/shared/constants";
+import { SEO_DEFAULTS } from "@/shared/constants/seoDefaults";
 
 type ProductDetailsProps = {
   data: Product;
@@ -39,10 +40,26 @@ export const ProductDetails = ({
               type: "image/jpeg",
             },
           ],
+          siteName: SEO_DEFAULTS.siteName,
         }}
         twitter={{
           cardType: "summary_large_image",
         }}
+      />
+      <ProductJsonLd
+        productName={title}
+        images={[image]}
+        description={description}
+        aggregateRating={{
+          ratingValue: rating.rate,
+          reviewCount: rating.count,
+        }}
+        offers={[
+          {
+            price: { price },
+            priceCurrency: "USD",
+          },
+        ]}
       />
       <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
         <div className="relative aspect-video md:aspect-square">
