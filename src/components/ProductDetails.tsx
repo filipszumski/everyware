@@ -56,7 +56,7 @@ export const ProductDetails = ({
         }}
         offers={[
           {
-            price: { price },
+            price,
             priceCurrency: "USD",
           },
         ]}
