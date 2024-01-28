@@ -1,3 +1,5 @@
+import { MdxSerializeResult } from "@/shared/types/MdxResult";
+
 export interface Product {
   id: string;
   title: string;
@@ -6,7 +8,7 @@ export interface Product {
   category: string;
   rating: Rating;
   image: string;
-  longDescription: string;
+  longDescription: MdxSerializeResult;
 }
 
 interface Rating {

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { NextSeo, ProductJsonLd } from "next-seo";
-import ReactMarkdown from "react-markdown";
 
 import { Product } from "@/api/products";
 import { APP_ROUTES } from "@/shared/constants";
 import { SEO_DEFAULTS } from "@/shared/constants/seoDefaults";
+
+import { Markdown } from "./Markdown";
 
 type ProductDetailsProps = {
   data: Product;
@@ -82,7 +83,7 @@ export const ProductDetails = ({
             </span>
           </div>
           <article className="prose prose-slate">
-            <ReactMarkdown>{longDescription}</ReactMarkdown>
+            <Markdown>{longDescription}</Markdown>
           </article>
           <div className="flex justify-end w-full">
             <span>${price}</span>
