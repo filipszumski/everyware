@@ -5,7 +5,6 @@ import { MdxSerializeResult } from "@/shared/types/MdxResult";
 
 const isExternalLink = (href: string) => {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-  console.log(appUrl);
 
   if (href.search(/^https?:\/\//) < 0) {
     return false;
