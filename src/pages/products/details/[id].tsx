@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
+import { serialize } from "next-mdx-remote/serialize";
 import queryString from "query-string";
 
 import { getProduct, getProducts, Product } from "@/api/products";
@@ -60,7 +61,10 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      product,
+      product: {
+        ...product,
+        longDescription: await serialize(product.longDescription),
+      },
     },
     revalidate: 60,
   };
