@@ -1,3 +1,5 @@
+import { HomeIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
+
 import { NavigationListItem } from "../types";
 import { APP_ROUTES } from "./appRoutes";
 
@@ -9,6 +11,7 @@ export const NAVIGATION_LIST: NavigationList = [
     basePathname: APP_ROUTES.home,
     exact: true,
     title: "Home",
+    icon: HomeIcon,
   },
   {
     href: {
@@ -17,5 +20,6 @@ export const NAVIGATION_LIST: NavigationList = [
     },
     basePathname: APP_ROUTES.products,
     title: "Products",
+    icon: ShoppingBagIcon,
   },
 ];

@@ -1,13 +1,12 @@
-import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
-import { PropsWithChildren } from "react";
 
-type Props = PropsWithChildren<
-  LinkProps & {
-    exact?: boolean;
-    basePathname: string;
-  }
->;
+import { Link, LinkProps } from "@/components/Link";
+import { twMerge } from "@/shared/utilities/twMerge";
+
+type NavLinkProps = LinkProps & {
+  exact?: boolean;
+  basePathname: string;
+};
 
 function isActiveNavLink(
   basePathname: string,
@@ -25,21 +24,22 @@ export const NavLink = ({
   children,
   exact,
   basePathname,
+  className,
   ...restProps
-}: Props) => {
+}: NavLinkProps) => {
   const { pathname } = useRouter();
 
   return (
     <Link
-      className={`
-          ${
-            isActiveNavLink(basePathname, pathname, exact)
-              ? "font-bold bg-blue-200 text-blue-700"
-              : "font-normal  text-blue-500 hover:bg-blue-100"
-          }
-        inline-block w-full py-2 px-2 rounded-md
-        `}
       {...restProps}
+      variant="contained"
+      className={twMerge(className, {
+        "font-bold bg-primaryBackground text-primaryActive": isActiveNavLink(
+          basePathname,
+          pathname,
+          exact,
+        ),
+      })}
     >
       {children}
     </Link>

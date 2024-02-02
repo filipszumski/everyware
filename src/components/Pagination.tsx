@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { PAGE_COUNT } from "@/shared/constants";
+import { twMerge } from "@/shared/utilities/twMerge";
 
 const VISIBLE_PAGES_BUTTONS = 5;
 
@@ -75,14 +76,13 @@ export const Pagination = () => {
             <li key={page}>
               <Link
                 href={link}
-                className={`
-                 rounded-full hover:bg-blue-600 hover:text-white flex justify-center items-center h-7 aspect-square
-                ${
-                  currentPage === page
-                    ? "bg-blue-500 text-white pointer-events-none"
-                    : "bg-gray-200"
-                }  
-            `}
+                className={twMerge(
+                  "rounded-full hover:bg-primaryActive hover:text-onPrimary flex justify-center items-center h-7 aspect-square bg-neutralBackground",
+                  {
+                    "bg-primary text-onPrimary pointer-events-none":
+                      currentPage === page,
+                  },
+                )}
               >
                 {page}
               </Link>
