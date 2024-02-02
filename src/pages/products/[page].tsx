@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 
 import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
-import { APP_ROUTES, DEFAULT_TAKE } from "@/shared/constants";
+import { DEFAULT_TAKE } from "@/shared/constants";
 
 type Params = {
   page: string;
@@ -25,11 +24,7 @@ const ProductsPage = ({
       <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {products.map(({ image, price, rating, title, id }) => (
           <li key={id}>
-            <Link
-              href={{ pathname: APP_ROUTES.productDetails, query: { id: id } }}
-            >
-              <ProductsListItem data={{ image, price, rating, title }} />
-            </Link>
+            <ProductsListItem data={{ image, price, rating, title, id }} />
           </li>
         ))}
       </ul>
