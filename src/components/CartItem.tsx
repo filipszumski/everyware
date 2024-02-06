@@ -1,14 +1,13 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-import {
-  CartItem as CartItemType,
-  useCartContext,
-} from "@/context/cartContext/CartContext";
+import { useCartContext } from "@/context/cartContext/CartContext";
+import { CartItem as CartItemType } from "@/context/cartContext/types";
 import { useDelayedFunction } from "@/shared/hooks/useDelayedFunction";
 
 import { Button } from "./Button";
+import { Input } from "./Input";
 import { Price } from "./Price";
 
 type CartItemProps = {
@@ -23,8 +22,9 @@ export const CartItem = ({
     quantity,
   },
 }: CartItemProps) => {
-  const { removeItemFromCart } = useCartContext();
+  const { removeItemFromCart, updateCartItemQuantity } = useCartContext();
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
+  const [itemCount, setItemCount] = useState(quantity);
 
   const [delayedRemoveItemFromCart] = useDelayedFunction(
     (id: string) => {
@@ -34,6 +34,22 @@ export const CartItem = ({
     [removeItemFromCart],
     ANIMATION_DURATION,
   );
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = Number.parseInt(e.target.value);
+
+    setItemCount((prev) => {
+      if (!newQuantity) {
+        return prev;
+      }
+
+      return newQuantity;
+    });
+
+    if (itemCount !== +e.target.value) {
+      updateCartItemQuantity(id, newQuantity);
+    }
+  };
 
   return (
     <li
@@ -68,10 +84,8 @@ export const CartItem = ({
       </div>
       <div className="flex-1 grid items-center gap-2 grid-cols-cartItemsSmall sm:grid-cols-cartItems">
         <div>{title}</div>
-        <Price className="justify-self-end order-4 sm:order-2">{price}</Price>
-        <p className="order-3">qty. {quantity}</p>
         <Button
-          className="justify-self-end order-2 sm:order-4"
+          className="justify-self-end sm:order-4"
           onClick={() => {
             if (removingItemId !== null) {
               delayedRemoveItemFromCart.cancel();
@@ -82,6 +96,17 @@ export const CartItem = ({
           variant="text"
           icon={TrashIcon}
         />
+        <Input
+          className="max-w-16"
+          value={itemCount}
+          onChange={handleInputChange}
+          min={1}
+          max={999}
+          step={1}
+          label="Qty."
+          type="number"
+        />
+        <Price className="justify-self-end sm:order-2">{price}</Price>
       </div>
     </li>
   );

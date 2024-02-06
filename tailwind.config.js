@@ -19,6 +19,7 @@ module.exports = {
         textSecondary: "var(--text-secondary)",
         disabled: "var(--disabled)",
         defaultBorder: "var(--border)",
+        error: "var(--error)",
       },
       height: {
         header: "calc(var(--header-height) * 1px)",

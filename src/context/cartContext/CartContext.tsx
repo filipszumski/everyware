@@ -2,31 +2,40 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
 
-import { Product } from "@/api/products";
+import { LOCAL_STORAGE_KEYS } from "@/shared/constants/localStorageKeys";
+import { getLocalStorageValue } from "@/shared/utilities/getLocalStorageValue";
 
-type CartItemData = Pick<Product, "id" | "price" | "title" | "image">;
-
-export type CartItem = {
-  data: CartItemData;
-  quantity: number;
-};
-
-type CartState = {
-  cartItems: CartItem[];
-  addItemToCart: (cartItem: CartItemData) => void;
-  removeItemFromCart: (id: CartItemData["id"]) => void;
-  clearCart: () => void;
-  allCartItemsQuantity: number;
-};
+import { CartItem, CartItemData, CartState } from "./types";
+import { isCartItems } from "./utils";
 
 const CartContext = createContext<CartState | null>(null);
 
 export const CartContextProvider = ({ children }: PropsWithChildren) => {
   const [cartItems, setCartItems] = useState<CartState["cartItems"]>([]);
+  const [isCartItemsFromLocalStorageSet, setIsCartItemsFromLocalStorageSet] =
+    useState(false);
+
+  useEffect(() => {
+    if (!isCartItemsFromLocalStorageSet) {
+      const localStorageCartItems = getLocalStorageValue(
+        LOCAL_STORAGE_KEYS.cartItems,
+        [],
+        isCartItems,
+      );
+      setCartItems(localStorageCartItems);
+      setIsCartItemsFromLocalStorageSet(true);
+    } else {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.cartItems,
+        JSON.stringify(cartItems),
+      );
+    }
+  }, [cartItems, isCartItemsFromLocalStorageSet]);
 
   const allCartItemsQuantity = cartItems.reduce(
     (acc, cartItem) => acc + cartItem.quantity,
@@ -63,18 +72,39 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const removeItemFromCart = (id: CartItemData["id"]) => {
-    setCartItems((prev) => prev.filter((cartItem) => cartItem.data.id !== id));
+    setCartItems((prevState) =>
+      prevState.filter((cartItem) => cartItem.data.id !== id),
+    );
+  };
+
+  const updateCartItemQuantity = (
+    id: CartItemData["id"],
+    quantity: CartItem["quantity"],
+  ) => {
+    setCartItems((prevState) =>
+      prevState.map((cartItem) => {
+        if (cartItem.data.id === id) {
+          return {
+            ...cartItem,
+            quantity: quantity,
+          };
+        }
+
+        return cartItem;
+      }),
+    );
   };
 
   const clearCart = () => setCartItems([]);
 
-  const value = useMemo(
+  const value: CartState = useMemo(
     () => ({
       cartItems,
       addItemToCart,
       clearCart,
       removeItemFromCart,
       allCartItemsQuantity,
+      updateCartItemQuantity,
     }),
     [cartItems, allCartItemsQuantity],
   );
