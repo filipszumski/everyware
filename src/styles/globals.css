@@ -14,7 +14,7 @@
         --color-neutral-700: theme('colors.gray.700');
         --color-neutral-800: theme('colors.gray.800');
         --color-neutral-900: theme('colors.gray.900');
-
+        
         --color-primary-50: theme('colors.blue.50');
         --color-primary-100: theme('colors.blue.100');
         --color-primary-200: theme('colors.blue.200');
@@ -32,12 +32,14 @@
         --on-primary-background: var(--color-primary-500);
         --primary-active: var(--color-primary-700);
         --background: var(--color-neutral-100);
-        --neutral-background:theme('colors.white');
+        --neutral-background: theme('colors.white');
         --text:var(--color-neutral-800);
         --text-secondary:var(--color-neutral-400);
         --disabled: var(--color-neutral-400);
         --border: var(--color-neutral-200);
+        --error: theme('colors.red.500');
 
+        
         --header-height: 75;
     }
 }
