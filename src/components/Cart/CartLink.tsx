@@ -1,8 +1,8 @@
 import { useCartContext } from "@/context/cartContext/CartContext";
 import { APP_ROUTES } from "@/shared/constants";
 
-import { LinkProps } from "./Link";
-import { NavLink } from "./NavLink";
+import { LinkProps } from "../Link";
+import { NavLink } from "../NavLink";
 
 export const CartLink = ({ children, ...props }: LinkProps) => {
   const { allCartItemsQuantity } = useCartContext();

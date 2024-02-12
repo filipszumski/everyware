@@ -1,0 +1,5 @@
+query GetProductsSlugs($first: Int) {
+  products(first: $first, skip: 0) {
+    slug
+  }
+}

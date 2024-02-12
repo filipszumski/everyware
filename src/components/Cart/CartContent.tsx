@@ -2,7 +2,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 
 import { useCartContext } from "@/context/cartContext/CartContext";
 
-import { Button } from "./Button";
+import { Button } from "../Button";
 import { CartItem } from "./CartItem";
 
 export const CartContent = () => {

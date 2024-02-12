@@ -1,17 +1,27 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
-import queryString from "query-string";
 
-import { getProducts, Product } from "@/api/products";
 import { Pagination, ProductsListItem } from "@/components";
+import { apolloClient } from "@/graphql/apolloClient";
+import {
+  GetProductsDocument,
+  GetProductsQuery,
+  GetProductsQueryVariables,
+} from "@/graphql/generated/graphql";
 import { DEFAULT_TAKE } from "@/shared/constants";
 
 type Params = {
   page: string;
 };
 
+type ProductsPageProps = {
+  products: GetProductsQuery["productsConnection"]["edges"];
+  count: number;
+};
+
 const ProductsPage = ({
   products,
+  count,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
@@ -22,13 +32,13 @@ const ProductsPage = ({
   return (
     <>
       <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map(({ image, price, rating, title, id }) => (
-          <li key={id}>
-            <ProductsListItem data={{ image, price, rating, title, id }} />
+        {products.map((product) => (
+          <li key={product.node.slug}>
+            <ProductsListItem data={product} />
           </li>
         ))}
       </ul>
-      <Pagination />
+      <Pagination itemsCount={count} />
     </>
   );
 };
@@ -47,23 +57,35 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
 };
 
 export const getStaticProps: GetStaticProps<
-  { products: Product[] },
+  ProductsPageProps,
   Params
 > = async ({ params }) => {
-  if (!params?.page) {
+  const page = params?.page;
+
+  if (!page) {
     return {
       notFound: true,
     };
   }
 
-  const page = params?.page;
-  const offset = (+page - 1) * DEFAULT_TAKE;
+  const skip = (+page - 1) * DEFAULT_TAKE;
 
-  const products = await getProducts(
-    queryString.stringify({ take: DEFAULT_TAKE, offset }),
-  );
+  const {
+    data: {
+      productsConnection: {
+        aggregate: { count },
+        edges,
+      },
+    },
+  } = await apolloClient.query<GetProductsQuery, GetProductsQueryVariables>({
+    variables: {
+      first: DEFAULT_TAKE,
+      skip,
+    },
+    query: GetProductsDocument,
+  });
 
-  if (!products) {
+  if (!edges) {
     return {
       notFound: true,
     };
@@ -71,7 +93,8 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      products: products,
+      products: edges,
+      count: count,
     },
   };
 };

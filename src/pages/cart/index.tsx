@@ -1,5 +1,5 @@
-import { CartContent } from "@/components/CartContent";
-import { CartSummary } from "@/components/CartSummary";
+import { CartContent } from "@/components/Cart/CartContent";
+import { CartSummary } from "@/components/Cart/CartSummary";
 import { useCartContext } from "@/context/cartContext/CartContext";
 
 const CartPage = () => {

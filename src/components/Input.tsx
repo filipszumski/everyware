@@ -30,9 +30,9 @@ export const Input = ({
           {...props}
           className={twMerge(
             `
-              peer p-2 rounded-md  border-2 border-solid border-defaultBorder placeholder-transparent
+              peer p-2 rounded-md  border-2 border-solid border-borderDefault placeholder-transparent
               disabled:text-disabled
-              focus:outline-2 focus:outline-primaryActive`,
+              focus:outline-2 focus:outline-primary`,
             className,
             {
               "border-error focus:outline-error": !!error,
@@ -44,10 +44,10 @@ export const Input = ({
             htmlFor="input"
             className={twMerge(
               `
-                  left-[0.25rem] -translate-y-[50%] px-2 text-xs bg-neutralBackground rounded-md text-textSecondary absolute transition-all
+                  left-[0.25rem] -translate-y-[50%] px-1 text-xs bg-backgroundLight text-textSecondary absolute transition-all
                   disabled:text-disabled
-                  peer-placeholder-shown:left-0 peer-placeholder-shown:text-base peer-placeholder-shown:bg-transparent peer-placeholder-shown:translate-y-[0.6rem]
-                  peer-focus:left-2 peer-focus:text-xs peer-focus:bg-neutralBackground peer-focus:-translate-y-[50%]
+                  peer-placeholder-shown:left-1 peer-placeholder-shown:text-base peer-placeholder-shown:translate-y-[0.6rem]
+                  peer-focus:left-2 peer-focus:text-xs peer-focus:-translate-y-[50%]
                   `,
               {
                 "text-error": !!error,

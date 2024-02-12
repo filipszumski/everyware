@@ -6,6 +6,6 @@ export const APP_ROUTES = {
   products: PRODUCTS_BASE_PATHNAME,
   productsPage: `${PRODUCTS_BASE_PATHNAME}/[page]`,
   productsDetails: PRODUCTS_DETAILS_PATHNAME,
-  productDetails: `${PRODUCTS_DETAILS_PATHNAME}/[id]`,
+  productDetails: `${PRODUCTS_DETAILS_PATHNAME}/[slug]`,
   cartPage: "/cart",
 };

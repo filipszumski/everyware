@@ -1,0 +1,21 @@
+query GetProducts($first: Int, $skip: Int) {
+  productsConnection(first: $first, skip: $skip) {
+    aggregate {
+      count
+    }
+    edges {
+      node {
+        slug
+        name
+        price
+        images(first: 1) {
+          url
+        }
+        reviews {
+          rating
+          id
+        }
+      }
+    }
+  }
+}

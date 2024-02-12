@@ -6,13 +6,13 @@ import { ButtonIcon, ButtonIconProps } from "@/shared/types/buttonIcon";
 import { twMerge } from "@/shared/utilities/twMerge";
 
 const linkVariants = cva(
-  `text-primary flex gap-2 items-center px-4 py-2 rounded-md`,
+  `text-primary flex gap-2 items-center px-4 py-2 rounded-md focus:outline-2 focus:outline-primary`,
   {
     variants: {
       variant: {
         text: "hover:text-primaryActive",
         underlined: "underline hover:text-primaryActive",
-        contained: "hover:bg-primaryBackground",
+        contained: "hover:bg-primaryLight",
       },
     },
     defaultVariants: {
