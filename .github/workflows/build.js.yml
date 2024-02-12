@@ -31,5 +31,6 @@ jobs:
         node-version: 18
         cache: 'yarn'
     - run: yarn install
+    - run: ls -R public
     - run: yarn codegen
     - run: yarn tsc --noEmit
