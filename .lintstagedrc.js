@@ -7,6 +7,6 @@ const buildEslintCommand = (filenames) =>
     `;
 
 module.exports = {
-  "**/*.(ts|tsx)": () => "yarn tsc --noEmit",
-  "**/*.(ts|tsx|js)": [buildEslintCommand],
+  "**/*.(ts|tsx)": () => ['yarn codegen', "yarn tsc --noEmit"],
+  "**/*.(ts|tsx|js)": buildEslintCommand,
 };
