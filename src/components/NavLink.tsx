@@ -34,7 +34,7 @@ export const NavLink = ({
       {...restProps}
       variant="contained"
       className={twMerge(className, {
-        "font-bold bg-primaryBackground text-primaryActive": isActiveNavLink(
+        "font-bold bg-primaryLight text-primaryActive": isActiveNavLink(
           basePathname,
           pathname,
           exact,

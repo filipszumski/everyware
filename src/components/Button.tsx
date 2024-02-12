@@ -5,7 +5,7 @@ import { ButtonIcon, ButtonIconProps } from "@/shared/types/buttonIcon";
 import { twMerge } from "@/shared/utilities/twMerge";
 
 const buttonVariants = cva(
-  "flex gap-2 items-center justify-center px-4 py-2 rounded-md",
+  "inline-block w-fit px-4 py-2 rounded-md focus:outline-2 focus:outline-primary",
   {
     variants: {
       variant: {
@@ -15,13 +15,13 @@ const buttonVariants = cva(
           disabled:bg-disabled
         `,
         outlined: `
-          bg-neutralBackground text-primary border-solid border-2 border-primary
-          hover:bg-primaryBackground
-          disabled:hover:bg-neutralBackground disabled:text-disabled disabled:border-disabled
+          bg-backgroundLight text-primary border-solid border-2 border-primary
+          hover:bg-primaryLight
+          disabled:hover:bg-backgroundLight disabled:text-disabled disabled:border-disabled
         `,
         text: `
           text-primary
-          hover:bg-primaryBackground
+          hover:bg-primaryLight
         `,
       },
       fullWidth: {
@@ -64,13 +64,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "p-2 rounded-full": Icon && !children,
         })}
       >
-        {Icon && (
-          <Icon
-            className={twMerge("h-5 w-5", iconClassName)}
-            {...restIconProps}
-          />
-        )}
-        {children}
+        <div className="flex items-center justify-center gap-2">
+          {Icon && (
+            <Icon
+              className={twMerge("h-5 w-5", iconClassName)}
+              {...restIconProps}
+            />
+          )}
+          {children}
+        </div>
       </button>
     );
   },

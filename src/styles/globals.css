@@ -28,18 +28,18 @@
 
         --primary: var(--color-primary-500);
         --on-primary: theme('colors.white');
-        --primary-background: var(--color-primary-100);
-        --on-primary-background: var(--color-primary-500);
+        --primary-light: var(--color-primary-100);
         --primary-active: var(--color-primary-700);
         --background: var(--color-neutral-100);
-        --neutral-background: theme('colors.white');
+        --background-contrast: var(--color-neutral-200);
+        --background-light: theme('colors.white');
         --text:var(--color-neutral-800);
         --text-secondary:var(--color-neutral-400);
         --disabled: var(--color-neutral-400);
         --border: var(--color-neutral-200);
         --error: theme('colors.red.500');
 
-        
-        --header-height: 75;
+        /* REM */
+        --header-height: 4.5;
     }
 }

@@ -6,9 +6,9 @@ import { useCartContext } from "@/context/cartContext/CartContext";
 import { CartItem as CartItemType } from "@/context/cartContext/types";
 import { useDelayedFunction } from "@/shared/hooks/useDelayedFunction";
 
-import { Button } from "./Button";
-import { Input } from "./Input";
-import { Price } from "./Price";
+import { Button } from "../Button";
+import { Input } from "../Input";
+import { Price } from "../Product/Price";
 
 type CartItemProps = {
   item: CartItemType;
@@ -69,7 +69,7 @@ export const CartItem = ({
             }),
       }}
       className={`
-          p-4 border-solid border-2 border-defaultBorder rounded-md bg-white shadow-md w-full
+          p-4 border-solid border-2 border-borderDefault rounded-md bg-white shadow-md w-full
           flex items-center gap-4
           `}
     >
@@ -106,7 +106,9 @@ export const CartItem = ({
           label="Qty."
           type="number"
         />
-        <Price className="justify-self-end sm:order-2">{price}</Price>
+        <Price className="justify-self-end sm:order-2 font-normal text-textDefault text-base">
+          {price}
+        </Price>
       </div>
     </li>
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote";
 
-import { MdxSerializeResult } from "@/shared/types/MdxResult";
+import { MdxSerializeResult } from "@/shared/types/mdxResult";
 
 const isExternalLink = (href: string) => {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;

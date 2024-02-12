@@ -10,7 +10,13 @@ export const Price = ({
   children: string | number;
 }) => {
   return (
-    <span {...props} className={twMerge("inline-block", className)}>
+    <span
+      className={twMerge(
+        "inline-block text-lg font-bold text-primary",
+        className,
+      )}
+      {...props}
+    >
       ${children}
     </span>
   );
