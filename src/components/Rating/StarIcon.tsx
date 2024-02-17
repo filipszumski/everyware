@@ -1,7 +1,9 @@
-import { useId } from "react";
+import { SVGProps, useId } from "react";
 import { z } from "zod";
 
-type Props = {
+import { twMerge } from "@/shared/utilities/twMerge";
+
+type Props = SVGProps<SVGElement> & {
   fillRatio: number;
 };
 
@@ -17,7 +19,7 @@ const validateFillRatio = (fillRatio: number) => {
   }
 };
 
-export const StarIcon = ({ fillRatio }: Props) => {
+export const StarIcon = ({ fillRatio, className }: Props) => {
   const gradientId = useId();
   const parsedFillRatio = validateFillRatio(fillRatio);
 
@@ -30,7 +32,7 @@ export const StarIcon = ({ fillRatio }: Props) => {
         stroke: "var(--border)",
         strokeWidth: 1.5,
       }}
-      className="w-6 h-6 text-yellow-400"
+      className={twMerge("w-6 h-6 text-yellow-400", className)}
     >
       <defs>
         <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">

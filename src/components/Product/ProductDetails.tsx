@@ -11,15 +11,29 @@ import { Button } from "../Button";
 import { Rating } from "../Rating/Rating";
 import { Categories } from "./Categories";
 import { Price } from "./Price";
+import { ProductTabs } from "./ProductTabs/ProductTabs";
 
 type ProductDetailsProps = {
   data: ProductWithMarkdown;
 };
 
 export const ProductDetails = ({
-  data: { description, images, price, name, slug, reviews, categories },
+  data: {
+    description,
+    images,
+    price,
+    name,
+    slug,
+    reviews,
+    categories,
+    longDescription,
+  },
 }: ProductDetailsProps) => {
   const { addItemToCart } = useCartContext();
+
+  const reviewCount = reviews.length;
+  const ratingValue =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviewCount;
 
   return (
     <>
@@ -49,6 +63,20 @@ export const ProductDetails = ({
         productName={name}
         images={images.map((image) => image.url)}
         description={description}
+        reviews={reviews.map(({ content, headline, name, rating }) => ({
+          author: name,
+          reviewBody: content,
+          name: headline,
+          reviewRating: {
+            bestRating: "5",
+            ratingValue: rating,
+            worstRating: "1",
+          },
+        }))}
+        aggregateRating={{
+          ratingValue: ratingValue,
+          reviewCount: reviewCount,
+        }}
         offers={[
           {
             price,
@@ -68,11 +96,19 @@ export const ProductDetails = ({
           />
         </div>
         <div className="flex flex-col justify-start gap-6">
-          <h2 className="text-3xl font-bold">{name}</h2>
-          <Rating reviews={reviews} displayMode="scale" />
-          <Price className="text-lg">{price}</Price>
-          <div>{description}</div>
-          <Categories categories={categories} />
+          <div className="grid grid-cols-1 gap-2">
+            <h2 className="text-3xl font-bold">{name}</h2>
+            <Rating
+              ratingValue={ratingValue}
+              reviewCount={reviewCount}
+              displayMode="scale"
+            />
+            <Price className="text-lg">{price}</Price>
+          </div>
+          <div className="grid grid-cols-1 gap-2">
+            <div>{description}</div>
+            <Categories categories={categories} />
+          </div>
           <Button
             icon={ShoppingCartIcon}
             variant="contained"
@@ -88,6 +124,7 @@ export const ProductDetails = ({
             Add to cart
           </Button>
         </div>
+        <ProductTabs longDescription={longDescription} reviews={reviews} />
       </div>
     </>
   );

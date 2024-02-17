@@ -21,6 +21,10 @@ export const ProductsListItem = ({
 }: ProductsListItemProps) => {
   const { addItemToCart } = useCartContext();
 
+  const reviewCount = reviews.length;
+  const ratingValue =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviewCount;
+
   return (
     <div className="bg-white rounded-xl shadow-md grid grid-cols-1 p-4 gap-4 transition-transform ease-in-out duration-150 hover:scale-105">
       <Link
@@ -39,7 +43,11 @@ export const ProductsListItem = ({
         <h2 className="text-xl font-bold">{name}</h2>
         <div className="flex items-center justify-between">
           <Price>{price}</Price>
-          <Rating reviews={reviews} displayMode="icon" />
+          <Rating
+            ratingValue={ratingValue}
+            reviewCount={reviewCount}
+            displayMode="icon"
+          />
         </div>
       </Link>
       <Button

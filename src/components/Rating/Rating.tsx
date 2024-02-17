@@ -1,24 +1,19 @@
-import { Review } from "@/graphql/generated/graphql";
-
 import { Stars } from "./Stars";
 import { RatingDisplayMode } from "./types";
 
 type Props = {
-  reviews: Pick<Review, "rating" | "id">[];
+  ratingValue: number;
+  reviewCount: number;
   displayMode: RatingDisplayMode;
 };
 
-export const Rating = ({ reviews, displayMode }: Props) => {
-  const summedRating = reviews.reduce((acc, review) => acc + review.rating, 0);
-  const reviewsCount = reviews.length;
-  const rating = summedRating / reviewsCount;
-
+export const Rating = ({ ratingValue, reviewCount, displayMode }: Props) => {
   return (
     <div className="flex items-center">
-      <Stars displayMode={displayMode} rating={rating} />
+      <Stars displayMode={displayMode} rating={ratingValue} />
       <div>
-        <span>{rating.toFixed(1)}</span>{" "}
-        <span className="text-textSecondary">({reviewsCount})</span>
+        <span>{ratingValue.toFixed(1)}</span>{" "}
+        <span className="text-textSecondary">({reviewCount})</span>
       </div>
     </div>
   );
