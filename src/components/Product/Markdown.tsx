@@ -2,15 +2,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote";
 
 import { MdxSerializeResult } from "@/shared/types/mdxResult";
-
-const isExternalLink = (href: string) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-
-  if (href.search(/^https?:\/\//) < 0) {
-    return false;
-  }
-  return appUrl ? !href.includes(appUrl) : true;
-};
+import { isExternalLink } from "@/shared/utilities/isExternalLink";
 
 export const Markdown = ({ children }: { children: MdxSerializeResult }) => {
   return (
