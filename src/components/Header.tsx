@@ -31,7 +31,7 @@ export const Header = () => {
           })}
         </ul>
         <div className="flex items-center gap-4">
-          <CartLink href={APP_ROUTES.cartPage} icon={ShoppingCartIcon} />
+          <CartLink href={APP_ROUTES.cart} icon={ShoppingCartIcon} />
           <Popover className="sm:hidden">
             <Popover.Button className="flex items-center">
               {<Bars3Icon className="w-6 h-6 text-primary" />}

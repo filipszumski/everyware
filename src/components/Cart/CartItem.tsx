@@ -7,7 +7,7 @@ import { CartItem as CartItemType } from "@/context/cartContext/types";
 import { useDelayedFunction } from "@/shared/hooks/useDelayedFunction";
 
 import { Button } from "../Button";
-import { Input } from "../Input";
+import { Input } from "../Form/Input";
 import { Price } from "../Product/Price";
 
 type CartItemProps = {

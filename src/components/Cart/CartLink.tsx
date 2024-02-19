@@ -20,7 +20,7 @@ export const CartLink = ({ children, ...props }: LinkProps) => {
           {allCartItemsQuantity}
         </div>
       )}
-      <NavLink basePathname={APP_ROUTES.cartPage} exact {...props}>
+      <NavLink basePathname={APP_ROUTES.cart} exact {...props}>
         {children}
       </NavLink>
     </div>
