@@ -7,5 +7,6 @@ export const APP_ROUTES = {
   productsPage: `${PRODUCTS_BASE_PATHNAME}/[page]`,
   productsDetails: PRODUCTS_DETAILS_PATHNAME,
   productDetails: `${PRODUCTS_DETAILS_PATHNAME}/[slug]`,
-  cartPage: "/cart",
+  cart: "/cart",
+  checkout: "/checkout",
 };

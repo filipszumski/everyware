@@ -4,8 +4,11 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import { ButtonIcon, ButtonIconProps } from "@/shared/types/buttonIcon";
 import { twMerge } from "@/shared/utilities/twMerge";
 
-const buttonVariants = cva(
-  "inline-block w-fit px-4 py-2 rounded-md focus:outline-2 focus:outline-primary",
+export const buttonVariants = cva(
+  `
+  inline-flex justify-center whitespace-nowrap w-fit px-4 py-2 rounded-md ring-primary ring-offset-2
+  focus:ring-1 
+  `,
   {
     variants: {
       variant: {

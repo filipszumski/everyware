@@ -9,7 +9,7 @@ export const CartContent = () => {
   const { cartItems, clearCart } = useCartContext();
 
   return (
-    <div className="md:col-span-2 grid grid-cols-1 gap-4">
+    <div className="md:col-span-2 grid grid-cols-1 gap-4 content-start">
       <div className="flex justify-between items-center">
         <h2 className="text-lg">
           Cart <span className="text-textSecondary">({cartItems.length})</span>

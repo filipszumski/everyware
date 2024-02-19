@@ -13,7 +13,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       `}
     >
       <Header />
-      <main className="flex-grow xl:max-w-6xl xl:mx-auto w-full p-4 sm:p-8 lg:p-12">
+      <main className="flex-grow xl:max-w-6xl xl:mx-auto w-full p-4 sm:p-8 lg:p-12 relative">
         {children}
       </main>
       <Footer />

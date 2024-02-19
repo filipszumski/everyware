@@ -105,8 +105,9 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
       removeItemFromCart,
       allCartItemsQuantity,
       updateCartItemQuantity,
+      isCartItemsFromLocalStorageSet,
     }),
-    [cartItems, allCartItemsQuantity],
+    [cartItems, allCartItemsQuantity, isCartItemsFromLocalStorageSet],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

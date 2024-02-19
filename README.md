@@ -1,3 +1,46 @@
+# Everyware - online shop
+
+## Description
+An online shop created with a modern tech stack focusing on performance, scalability, and best practices in web development. Hosted on Vercel for seamless deployment. This project leverages the following technologies:
+
+- Next.js
+- Tailwind CSS
+- GraphQL
+- Hygraph (Headless CMS)
+- TypeScript
+
+## Features
+
+- **Static Site Generation, Server Side Rendering, and Incremental Static Regeneration**: Utilizes Next.js capabilities for pre-rendering pages for faster load times and improved SEO.
+- **SEO Good Practices**: Implements OpenGraph and JSON-LD for enhanced search engine optimization.
+- **Styling**: Uses Tailwind CSS and the Headless UI library, along with additional libraries like `tailwind-merge` and `class-variance-authority` for complex UI component styling.
+- **Content Management**: Leverages Hygraph Headless CMS for content delivery through GraphQL API integration.
+- **Forms**: Incorporates `react-hook-form` and `zod` for form handling and validation.
+- **Environment Setup**: Extensive setup with ESLint, Prettier, Husky for Git hooks, lint-staged, and commitlint for maintaining code quality.
+- **Responsive Design**: Ensures the application is fully responsive across various devices and screen sizes.
+
+## Functionalities
+
+- **Products Page**: Displays articles with server-side rendering for fast loading times.
+
+![Products page image](/public/products.png)
+
+- **Cart Logic**: Utilizes localStorage for managing the shopping cart, with plans 
+to sync the cart remotely.
+
+![Cart page image](/public/cart.png)
+
+- **Checkout Form**: Provides a checkout experience for users.
+
+![Checkout page image](/public/checkout.png)
+
+## To Be Done
+
+- Implementing order placement with payment handling (Stripe).
+- Setting up email communications.
+- Writing end-to-end tests.
+
+## Next
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
