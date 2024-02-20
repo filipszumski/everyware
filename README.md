@@ -25,6 +25,10 @@ An online shop created with a modern tech stack focusing on performance, scalabi
 
 ![Products page image](/public/products.png)
 
+- **Products Details**: Displays server rendered article details with markdown description and reviews list.
+
+![Products page image](/public/product-details.png)
+
 - **Cart Logic**: Utilizes localStorage for managing the shopping cart, with plans 
 to sync the cart remotely.
 
