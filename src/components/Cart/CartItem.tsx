@@ -7,7 +7,7 @@ import { CartItem as CartItemType } from "@/context/cartContext/types";
 import { useDelayedFunction } from "@/shared/hooks/useDelayedFunction";
 
 import { Button } from "../Button";
-import { Input } from "../Form/Input";
+import { TextField } from "../Form/Input/TextField";
 import { Price } from "../Product/Price";
 
 type CartItemProps = {
@@ -96,7 +96,7 @@ export const CartItem = ({
           variant="text"
           icon={TrashIcon}
         />
-        <Input
+        <TextField
           className="max-w-16"
           value={itemCount}
           onChange={handleInputChange}

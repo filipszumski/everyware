@@ -10,13 +10,9 @@ import { CartSummaryRow } from "./CartSummaryRow";
 
 export const CartSummary = () => {
   const router = useRouter();
-  const { cartItems } = useCartContext();
+  const { summaryPrice } = useCartContext();
 
   const displayCheckoutButton = router.pathname.startsWith(APP_ROUTES.cart);
-
-  const summaryPrice = cartItems
-    .reduce((acc, item) => acc + item.data.price * item.quantity, 0)
-    .toFixed(2);
 
   return (
     <div

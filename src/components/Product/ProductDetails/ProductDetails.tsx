@@ -1,17 +1,27 @@
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@apollo/client";
+import { PlusIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { NextSeo, ProductJsonLd } from "next-seo";
+import { useState } from "react";
 
 import { useCartContext } from "@/context/cartContext/CartContext";
+import {
+  GetProductReviewDocument,
+  GetProductReviewQuery,
+  GetProductReviewQueryVariables,
+} from "@/graphql/generated/graphql";
 import { ProductWithMarkdown } from "@/graphql/products/types";
 import { APP_ROUTES } from "@/shared/constants";
+import { RATING_SCALE } from "@/shared/constants/ratingScale";
 import { SEO_DEFAULTS } from "@/shared/constants/seoDefaults";
 
-import { Button } from "../Button";
-import { Rating } from "../Rating/Rating";
-import { Categories } from "./Categories";
-import { Price } from "./Price";
-import { ProductTabs } from "./ProductTabs/ProductTabs";
+import { Button } from "../../Button";
+import { Modal } from "../../Modal";
+import { Rating } from "../../Rating/Rating";
+import { Categories } from "../Categories";
+import { Price } from "../Price";
+import { ProductTabs } from "../ProductTabs/ProductTabs";
+import { ReviewForm } from "./ReviewForm/ReviewForm";
 
 type ProductDetailsProps = {
   data: ProductWithMarkdown;
@@ -29,11 +39,25 @@ export const ProductDetails = ({
     longDescription,
   },
 }: ProductDetailsProps) => {
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
   const { addItemToCart } = useCartContext();
+  const { data, loading } = useQuery<
+    GetProductReviewQuery,
+    GetProductReviewQueryVariables
+  >(GetProductReviewDocument, {
+    variables: {
+      slug,
+    },
+  });
 
-  const reviewCount = reviews.length;
+  const currentReviews = data?.product?.reviews || reviews;
+
+  const reviewCount = currentReviews.length;
   const ratingValue =
-    reviews.reduce((acc, review) => acc + review.rating, 0) / reviewCount;
+    currentReviews.reduce((acc, review) => acc + review.rating, 0) /
+    reviewCount;
+
+  const handleReviewModalClose = () => setReviewModalOpen(false);
 
   return (
     <>
@@ -63,12 +87,12 @@ export const ProductDetails = ({
         productName={name}
         images={images.map((image) => image.url)}
         description={description}
-        reviews={reviews.map(({ content, headline, name, rating }) => ({
+        reviews={currentReviews.map(({ content, headline, name, rating }) => ({
           author: name,
           reviewBody: content,
           name: headline,
           reviewRating: {
-            bestRating: "5",
+            bestRating: RATING_SCALE,
             ratingValue: rating,
             worstRating: "1",
           },
@@ -98,11 +122,21 @@ export const ProductDetails = ({
         <div className="flex flex-col justify-start gap-6">
           <div className="grid grid-cols-1 gap-2">
             <h2 className="text-3xl font-bold">{name}</h2>
-            <Rating
-              ratingValue={ratingValue}
-              reviewCount={reviewCount}
-              displayMode="scale"
-            />
+            <div className="flex justify-between">
+              <Rating
+                ratingValue={ratingValue}
+                reviewCount={reviewCount}
+                displayMode="scale"
+                loading={loading}
+              />
+              <Button
+                variant="text"
+                icon={PlusIcon}
+                onClick={() => setReviewModalOpen(true)}
+              >
+                Review
+              </Button>
+            </div>
             <Price className="text-lg">{price}</Price>
           </div>
           <div className="grid grid-cols-1 gap-2">
@@ -124,8 +158,22 @@ export const ProductDetails = ({
             Add to cart
           </Button>
         </div>
-        <ProductTabs longDescription={longDescription} reviews={reviews} />
+        <ProductTabs
+          longDescription={longDescription}
+          reviews={currentReviews}
+        />
       </div>
+      <Modal
+        open={reviewModalOpen}
+        setOpen={setReviewModalOpen}
+        title="Add new review"
+        description="Fill form to add new review"
+      >
+        <ReviewForm
+          handleReviewModalClose={handleReviewModalClose}
+          productSlug={slug}
+        />
+      </Modal>
     </>
   );
 };

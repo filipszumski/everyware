@@ -14,7 +14,12 @@ export const ProductReview = ({ review }: ProductReview) => {
       <div className="font-bold">{review.name}</div>
       <div className="flex gap-2 items-center">
         <div>{review.headline}</div>
-        <Stars displayMode="scale" rating={review.rating} className="w-4 h-4" />
+        <Stars
+          displayMode="scale"
+          rating={review.rating}
+          className="w-4 h-4"
+          interactionMode="static"
+        />
       </div>
       <div className="text-sm">{review.content}</div>
     </li>

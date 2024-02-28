@@ -18,10 +18,7 @@ export const ProductTabs = ({ longDescription, reviews }: TabsProps) => {
       <Tab.Group>
         <TabList>
           <TabListElement>Description</TabListElement>
-          <TabListElement disabled={!reviews.length}>
-            <span>Reviews </span>
-            <span className="text-textSecondary">({reviews.length})</span>
-          </TabListElement>
+          <TabListElement disabled={!reviews.length}>Reviews</TabListElement>
         </TabList>
         <Tab.Panels className="basis-full">
           <Tab.Panel className="p-2">

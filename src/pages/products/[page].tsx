@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
 
 import { Pagination, ProductsListItem } from "@/components";
 import { apolloClient } from "@/graphql/apolloClient";
@@ -23,12 +22,6 @@ const ProductsPage = ({
   products,
   count,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
       <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -52,7 +45,7 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
         page: page.toString(),
       },
     })),
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
@@ -94,8 +87,9 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       products: edges,
-      count: count,
+      count,
     },
+    revalidate: 60,
   };
 };
 
