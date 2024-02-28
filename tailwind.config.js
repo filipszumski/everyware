@@ -4,9 +4,6 @@ module.exports = {
   content: ["./src/pages/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-lato)"],
-      },
       colors: {
         primary: "var(--primary)",
         onPrimary: "var(--on-primary)",
@@ -23,6 +20,7 @@ module.exports = {
       },
       height: {
         header: "calc(var(--header-height) * 1rem)",
+        lineHeight: "calc(var(--line-height) * 1rem)",
       },
       inset: {
         header: "calc((var(--header-height) + 1) * 1rem)",

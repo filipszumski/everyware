@@ -13,7 +13,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}": types.GetProductDocument,
+    "mutation CreateOrder($order: OrderCreateInput!) {\n  createOrder(data: $order) {\n    id\n  }\n}": types.CreateOrderDocument,
+    "mutation CreateProductReview($review: ReviewCreateInput!) {\n  review: createReview(data: $review) {\n    id\n  }\n}": types.CreateProductReviewDocument,
+    "mutation PublishProductReview($id: ID!) {\n  publishReview(where: {id: $id}) {\n    id\n  }\n}": types.PublishProductReviewDocument,
+    "query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n      email\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}": types.GetProductDocument,
+    "query GetProductReview($slug: String!) {\n  product(where: {slug: $slug}) {\n    reviews {\n      headline\n      email\n      content\n      name\n      rating\n      id\n    }\n  }\n}": types.GetProductReviewDocument,
     "query GetProducts($first: Int, $skip: Int) {\n  productsConnection(first: $first, skip: $skip) {\n    aggregate {\n      count\n    }\n    edges {\n      node {\n        slug\n        name\n        price\n        images(first: 1) {\n          url\n        }\n        reviews {\n          rating\n          id\n        }\n      }\n    }\n  }\n}": types.GetProductsDocument,
     "query GetProductsSlugs($first: Int) {\n  products(first: $first, skip: 0) {\n    slug\n  }\n}": types.GetProductsSlugsDocument,
 };
@@ -35,7 +39,23 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}"): (typeof documents)["query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}"];
+export function graphql(source: "mutation CreateOrder($order: OrderCreateInput!) {\n  createOrder(data: $order) {\n    id\n  }\n}"): (typeof documents)["mutation CreateOrder($order: OrderCreateInput!) {\n  createOrder(data: $order) {\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreateProductReview($review: ReviewCreateInput!) {\n  review: createReview(data: $review) {\n    id\n  }\n}"): (typeof documents)["mutation CreateProductReview($review: ReviewCreateInput!) {\n  review: createReview(data: $review) {\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation PublishProductReview($id: ID!) {\n  publishReview(where: {id: $id}) {\n    id\n  }\n}"): (typeof documents)["mutation PublishProductReview($id: ID!) {\n  publishReview(where: {id: $id}) {\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n      email\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}"): (typeof documents)["query GetProduct($slug: String) {\n  product(where: {slug: $slug}) {\n    id\n    slug\n    description\n    longDescription\n    name\n    price\n    images {\n      url\n      height\n      width\n    }\n    reviews {\n      content\n      headline\n      id\n      name\n      rating\n      email\n    }\n    categories {\n      name\n      slug\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetProductReview($slug: String!) {\n  product(where: {slug: $slug}) {\n    reviews {\n      headline\n      email\n      content\n      name\n      rating\n      id\n    }\n  }\n}"): (typeof documents)["query GetProductReview($slug: String!) {\n  product(where: {slug: $slug}) {\n    reviews {\n      headline\n      email\n      content\n      name\n      rating\n      id\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -20,6 +20,7 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
   const [isCartItemsFromLocalStorageSet, setIsCartItemsFromLocalStorageSet] =
     useState(false);
 
+  // FIX next 14 update
   useEffect(() => {
     if (!isCartItemsFromLocalStorageSet) {
       const localStorageCartItems = getLocalStorageValue(
@@ -97,6 +98,14 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
 
   const clearCart = () => setCartItems([]);
 
+  const summaryPrice = useMemo(() => {
+    return parseFloat(
+      cartItems
+        .reduce((acc, item) => acc + item.data.price * item.quantity, 0)
+        .toFixed(2),
+    );
+  }, [cartItems]);
+
   const value: CartState = useMemo(
     () => ({
       cartItems,
@@ -106,8 +115,14 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
       allCartItemsQuantity,
       updateCartItemQuantity,
       isCartItemsFromLocalStorageSet,
+      summaryPrice,
     }),
-    [cartItems, allCartItemsQuantity, isCartItemsFromLocalStorageSet],
+    [
+      cartItems,
+      allCartItemsQuantity,
+      isCartItemsFromLocalStorageSet,
+      summaryPrice,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

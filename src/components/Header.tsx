@@ -11,7 +11,7 @@ import { NavLink } from "./NavLink";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 bg-backgroundLight  p-4 z-50 border-b-2 border-borderDefault h-header">
+    <header className="sticky top-0 bg-backgroundLight p-4 z-10 border-b-2 border-borderDefault h-header">
       <nav className="flex gap-8 items-center justify-between sm:justify-center">
         <Image src={logo} alt="Everyware logo" height={40} width={180} />
         <ul className="hidden sm:flex sm:gap-4 sm:flex-grow">

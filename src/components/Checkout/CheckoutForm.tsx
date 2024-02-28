@@ -1,27 +1,68 @@
+import { useMutation } from "@apollo/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useCartContext } from "@/context/cartContext/CartContext";
+import { CreateOrderDocument } from "@/graphql/generated/graphql";
+
 import { Button } from "../Button";
-import { Input } from "../Form/Input";
+import { TextField } from "../Form/Input/TextField";
 import { RowContainer } from "./RowContainer";
 import { checkoutFormSchema } from "./schema";
 
 type CheckoutForm = z.infer<typeof checkoutFormSchema>;
 
+const checkoutFormDefaultValues: CheckoutForm = {
+  address: "",
+  apartment: "",
+  cardNumber: "",
+  city: "",
+  company: "",
+  cvc: "",
+  email: "",
+  expirationDate: "",
+  nameOnCard: "",
+  postalCode: "",
+  region: "",
+  sameAsShipping: "",
+};
+
 export const CheckoutForm = () => {
+  const { summaryPrice } = useCartContext();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
+    reset,
   } = useForm<CheckoutForm>({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: "onSubmit",
+    reValidateMode: "onChange",
     resolver: zodResolver(checkoutFormSchema),
+    defaultValues: checkoutFormDefaultValues,
   });
+  const [createOrder] = useMutation(CreateOrderDocument);
 
-  const onSubmit: SubmitHandler<CheckoutForm> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CheckoutForm> = async (data) => {
+    const parsedFormData = checkoutFormSchema.safeParse(data);
+
+    if (parsedFormData.success) {
+      try {
+        const checkoutFormData = parsedFormData.data;
+        await createOrder({
+          variables: {
+            order: {
+              email: checkoutFormData.email,
+              total: summaryPrice,
+              stripeCheckoutId: "123456789",
+            },
+          },
+        });
+        reset();
+      } catch (e) {
+        console.error("An error occurred");
+      }
+    }
   };
 
   return (
@@ -30,7 +71,7 @@ export const CheckoutForm = () => {
       className="grid grid-cols-1 gap-4 col-span-2"
     >
       <h2 className="font-bold text-lg">Contact information</h2>
-      <Input
+      <TextField
         fullWidth
         {...register("email")}
         label="Email"
@@ -38,14 +79,14 @@ export const CheckoutForm = () => {
         error={errors.email?.message}
       />
       <h2 className="font-bold text-lg">Payment details</h2>
-      <Input
+      <TextField
         fullWidth
         {...register("nameOnCard")}
         label="Name on card"
         required
         error={errors.nameOnCard?.message}
       />
-      <Input
+      <TextField
         {...register("cardNumber")}
         label="Card number"
         required
@@ -53,14 +94,14 @@ export const CheckoutForm = () => {
         fullWidth
       />
       <RowContainer>
-        <Input
+        <TextField
           {...register("expirationDate")}
           label="Experation date (MM/YY)"
           error={errors.expirationDate?.message}
           required
           fullWidth
         />
-        <Input
+        <TextField
           {...register("cvc")}
           label="CVC"
           error={errors.cvc?.message}
@@ -69,13 +110,13 @@ export const CheckoutForm = () => {
         />
       </RowContainer>
       <h2 className="font-bold text-lg">Shipping address</h2>
-      <Input
+      <TextField
         {...register("company")}
         label="Company"
         error={errors.company?.message}
         fullWidth
       />
-      <Input
+      <TextField
         {...register("address")}
         label="Address"
         error={errors.address?.message}
@@ -83,13 +124,13 @@ export const CheckoutForm = () => {
         required
       />
       <RowContainer>
-        <Input
+        <TextField
           {...register("apartment")}
           label="Apartment"
           error={errors.apartment?.message}
           fullWidth
         />
-        <Input
+        <TextField
           {...register("city")}
           label="City"
           error={errors.city?.message}
@@ -98,14 +139,14 @@ export const CheckoutForm = () => {
         />
       </RowContainer>
       <RowContainer>
-        <Input
+        <TextField
           {...register("region")}
           label="State / Province"
           error={errors.region?.message}
           fullWidth
           required
         />
-        <Input
+        <TextField
           {...register("postalCode")}
           label="Postal code"
           error={errors.postalCode?.message}
@@ -113,7 +154,9 @@ export const CheckoutForm = () => {
           required
         />
       </RowContainer>
-      <Button type="submit">Submit</Button>
+      <Button disabled={isSubmitting} type="submit">
+        Submit
+      </Button>
     </form>
   );
 };
