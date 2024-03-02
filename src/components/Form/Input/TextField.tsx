@@ -10,22 +10,17 @@ type TextFieldProps = Omit<
 > & {
   label?: string;
   error?: string;
-  fullWidth?: boolean;
 };
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
-    { label, error, required, fullWidth, className, name, ...props },
+    { label, error, required, className, name, ...props },
     ref,
   ) {
     const id = useId();
 
     return (
-      <div
-        className={twMerge("inline-block max-w-full", {
-          "w-full": !!fullWidth,
-        })}
-      >
+      <div className={twMerge("inline-block w-full")}>
         <div className="relative w-full">
           <input
             ref={ref}

@@ -101,14 +101,12 @@ export const ReviewForm = ({
           label="Name"
           required
           error={errors.name?.message}
-          fullWidth
         />
         <TextField
           {...register("email")}
           label="Email"
           required
           error={errors.email?.message}
-          fullWidth
         />
         <div className="md:col-span-2">
           <TextField
@@ -116,7 +114,6 @@ export const ReviewForm = ({
             label="Title"
             required
             error={errors.headline?.message}
-            fullWidth
           />
         </div>
         <div className="md:col-span-2">
@@ -125,7 +122,6 @@ export const ReviewForm = ({
             label="Content"
             required
             error={errors.content?.message}
-            fullWidth
           />
         </div>
         <div className="md:col-span-2 flex justify-end gap-2">
