@@ -22,8 +22,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div
-        className={twMerge("inline-block max-w-52", {
-          "max-w-full w-full": !!fullWidth,
+        className={twMerge("inline-block max-w-full", {
+          "w-full": !!fullWidth,
         })}
       >
         <div className="relative w-full">
