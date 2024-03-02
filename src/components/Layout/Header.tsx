@@ -5,9 +5,9 @@ import Image from "next/image";
 
 import { APP_ROUTES, NAVIGATION_LIST } from "@/shared/constants";
 
-import logo from "../../public/everyware-logo.svg";
-import { CartLink } from "./Cart/CartLink";
-import { NavLink } from "./NavLink";
+import logo from "../../../public/everyware-logo.svg";
+import { CartLink } from "../Cart/CartLink";
+import { NavLink } from "../NavLink";
 
 export const Header = () => {
   return (

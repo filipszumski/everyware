@@ -10,3 +10,7 @@ export const APP_ROUTES = {
   cart: "/cart",
   checkout: "/checkout",
 };
+
+export const API_ROUTES = {
+  newsletter: "/api/newsletter",
+};

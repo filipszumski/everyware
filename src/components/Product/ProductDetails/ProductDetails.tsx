@@ -4,6 +4,7 @@ import Image from "next/image";
 import { NextSeo, ProductJsonLd } from "next-seo";
 import { useState } from "react";
 
+import { SkeletonElement } from "@/components/SkeleteonElement";
 import { useCartContext } from "@/context/cartContext/CartContext";
 import {
   GetProductReviewDocument,
@@ -14,6 +15,7 @@ import { ProductWithMarkdown } from "@/graphql/products/types";
 import { APP_ROUTES } from "@/shared/constants";
 import { RATING_SCALE } from "@/shared/constants/ratingScale";
 import { SEO_DEFAULTS } from "@/shared/constants/seoDefaults";
+import { withLoader } from "@/shared/utilities/withLoader";
 
 import { Button } from "../../Button";
 import { Modal } from "../../Modal";
@@ -49,6 +51,7 @@ export const ProductDetails = ({
       slug,
     },
   });
+  const RatingWithLoading = withLoader(Rating);
 
   const currentReviews = data?.product?.reviews || reviews;
 
@@ -122,12 +125,13 @@ export const ProductDetails = ({
         <div className="flex flex-col justify-start gap-6">
           <div className="grid grid-cols-1 gap-2">
             <h2 className="text-3xl font-bold">{name}</h2>
-            <div className="flex justify-between">
-              <Rating
+            <div className="flex justify-between items-center">
+              <RatingWithLoading
                 ratingValue={ratingValue}
                 reviewCount={reviewCount}
                 displayMode="scale"
                 loading={loading}
+                loader={<SkeletonElement className="w-48" />}
               />
               <Button
                 variant="text"
