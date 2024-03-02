@@ -10,22 +10,17 @@ type TextAreaProps = Omit<
 > & {
   label?: string;
   error?: string;
-  fullWidth?: boolean;
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextArea(
-    { label, error, required, fullWidth, className, name, ...props },
+    { label, error, required, className, name, ...props },
     ref,
   ) {
     const id = useId();
 
     return (
-      <div
-        className={twMerge("inline-block max-w-52", {
-          "max-w-full w-full": !!fullWidth,
-        })}
-      >
+      <div className={twMerge("inline-block w-full")}>
         <div className="relative w-full">
           <textarea
             ref={ref}

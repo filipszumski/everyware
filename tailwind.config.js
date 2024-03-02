@@ -4,6 +4,9 @@ module.exports = {
   content: ["./src/pages/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       colors: {
         primary: "var(--primary)",
         onPrimary: "var(--on-primary)",

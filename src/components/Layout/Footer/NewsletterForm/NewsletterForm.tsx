@@ -47,14 +47,21 @@ export const NewsletterForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex gap-2 justify-center items-start"
+      className="flex gap-2 flex-wrap justify-center items-start"
     >
-      <TextField
-        {...register("email")}
-        error={errors.email?.message}
-        className="w-72"
-      />
-      <Button type="submit" variant="outlined" disabled={isSubmitting}>
+      <div className="basis-full xs:basis-auto">
+        <TextField
+          {...register("email")}
+          error={errors.email?.message}
+          className="xs:w-72"
+        />
+      </div>
+      <Button
+        className="w-full xs:w-auto"
+        type="submit"
+        variant="outlined"
+        disabled={isSubmitting}
+      >
         Subscribe
       </Button>
     </form>

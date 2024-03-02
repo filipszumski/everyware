@@ -72,7 +72,6 @@ export const CheckoutForm = () => {
     >
       <h2 className="font-bold text-lg">Contact information</h2>
       <TextField
-        fullWidth
         {...register("email")}
         label="Email"
         required
@@ -80,7 +79,6 @@ export const CheckoutForm = () => {
       />
       <h2 className="font-bold text-lg">Payment details</h2>
       <TextField
-        fullWidth
         {...register("nameOnCard")}
         label="Name on card"
         required
@@ -91,7 +89,6 @@ export const CheckoutForm = () => {
         label="Card number"
         required
         error={errors.cardNumber?.message}
-        fullWidth
       />
       <RowContainer>
         <TextField
@@ -99,14 +96,12 @@ export const CheckoutForm = () => {
           label="Experation date (MM/YY)"
           error={errors.expirationDate?.message}
           required
-          fullWidth
         />
         <TextField
           {...register("cvc")}
           label="CVC"
           error={errors.cvc?.message}
           required
-          fullWidth
         />
       </RowContainer>
       <h2 className="font-bold text-lg">Shipping address</h2>
@@ -114,13 +109,11 @@ export const CheckoutForm = () => {
         {...register("company")}
         label="Company"
         error={errors.company?.message}
-        fullWidth
       />
       <TextField
         {...register("address")}
         label="Address"
         error={errors.address?.message}
-        fullWidth
         required
       />
       <RowContainer>
@@ -128,13 +121,11 @@ export const CheckoutForm = () => {
           {...register("apartment")}
           label="Apartment"
           error={errors.apartment?.message}
-          fullWidth
         />
         <TextField
           {...register("city")}
           label="City"
           error={errors.city?.message}
-          fullWidth
           required
         />
       </RowContainer>
@@ -143,14 +134,12 @@ export const CheckoutForm = () => {
           {...register("region")}
           label="State / Province"
           error={errors.region?.message}
-          fullWidth
           required
         />
         <TextField
           {...register("postalCode")}
           label="Postal code"
           error={errors.postalCode?.message}
-          fullWidth
           required
         />
       </RowContainer>
